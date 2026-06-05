@@ -1,0 +1,40 @@
+{
+  "e2e_real": [
+    {
+      "epsilon_base": 0.5,
+      "dka_t": 3,
+      "dka_n": 5,
+      "n_trajectories": 20,
+      "sadp_score_ms": 1.141,
+      "sadp_noise_ms": 0.067,
+      "dka_derive_ms": 119.592,
+      "encrypt_ms": 0.072,
+      "total_ms": 120.872,
+      "mean_budget_savings_pct": 58.41
+    },
+    {
+      "epsilon_base": 1.0,
+      "dka_t": 3,
+      "dka_n": 5,
+      "n_trajectories": 20,
+      "sadp_score_ms": 1.168,
+      "sadp_noise_ms": 0.068,
+      "dka_derive_ms": 120.135,
+      "encrypt_ms": 0.04,
+      "total_ms": 121.411,
+      "mean_budget_savings_pct": 58.41
+    },
+    {
+      "epsilon_base": 2.0,
+      "dka_t": 3,
+      "dka_n": 5,
+      "n_trajectories": 20,
+      "sadp_score_ms": 1.139,
+      "sadp_noise_ms": 0.068,
+      "dka_derive_ms": 119.513,
+      "encrypt_ms": 0.03,
+      "total_ms": 120.75,
+      "mean_budget_savings_pct": 58.41
+    }
+  ]
+}

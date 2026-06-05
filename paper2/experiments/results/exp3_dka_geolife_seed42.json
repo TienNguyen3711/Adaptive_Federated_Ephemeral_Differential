@@ -1,0 +1,174 @@
+{
+  "dka_timing": [
+    {
+      "t": 2,
+      "n": 3,
+      "secret_size_bytes": 32,
+      "repetitions": 50,
+      "split": {
+        "mean_ms": 0.003,
+        "min_ms": 0.003,
+        "max_ms": 0.011
+      },
+      "reconstruct": {
+        "mean_ms": 0.09,
+        "min_ms": 0.087,
+        "max_ms": 0.095
+      },
+      "serialise": {
+        "mean_ms": 0.001,
+        "min_ms": 0.0,
+        "max_ms": 0.008
+      },
+      "deserialise": {
+        "mean_ms": 0.001,
+        "min_ms": 0.0,
+        "max_ms": 0.002
+      },
+      "pbkdf2_baseline": {
+        "mean_ms": 120.922,
+        "min_ms": 120.084,
+        "max_ms": 123.776
+      }
+    },
+    {
+      "t": 3,
+      "n": 5,
+      "secret_size_bytes": 32,
+      "repetitions": 50,
+      "split": {
+        "mean_ms": 0.006,
+        "min_ms": 0.006,
+        "max_ms": 0.017
+      },
+      "reconstruct": {
+        "mean_ms": 0.314,
+        "min_ms": 0.29,
+        "max_ms": 0.345
+      },
+      "serialise": {
+        "mean_ms": 0.001,
+        "min_ms": 0.001,
+        "max_ms": 0.006
+      },
+      "deserialise": {
+        "mean_ms": 0.001,
+        "min_ms": 0.001,
+        "max_ms": 0.002
+      },
+      "pbkdf2_baseline": {
+        "mean_ms": 120.96,
+        "min_ms": 120.25,
+        "max_ms": 122.504
+      }
+    },
+    {
+      "t": 5,
+      "n": 10,
+      "secret_size_bytes": 32,
+      "repetitions": 50,
+      "split": {
+        "mean_ms": 0.013,
+        "min_ms": 0.012,
+        "max_ms": 0.026
+      },
+      "reconstruct": {
+        "mean_ms": 1.891,
+        "min_ms": 1.723,
+        "max_ms": 1.996
+      },
+      "serialise": {
+        "mean_ms": 0.001,
+        "min_ms": 0.001,
+        "max_ms": 0.009
+      },
+      "deserialise": {
+        "mean_ms": 0.001,
+        "min_ms": 0.001,
+        "max_ms": 0.004
+      },
+      "pbkdf2_baseline": {
+        "mean_ms": 121.862,
+        "min_ms": 120.365,
+        "max_ms": 136.532
+      }
+    },
+    {
+      "t": 10,
+      "n": 20,
+      "secret_size_bytes": 32,
+      "repetitions": 50,
+      "split": {
+        "mean_ms": 0.037,
+        "min_ms": 0.033,
+        "max_ms": 0.051
+      },
+      "reconstruct": {
+        "mean_ms": 4.716,
+        "min_ms": 4.415,
+        "max_ms": 4.919
+      },
+      "serialise": {
+        "mean_ms": 0.002,
+        "min_ms": 0.002,
+        "max_ms": 0.007
+      },
+      "deserialise": {
+        "mean_ms": 0.002,
+        "min_ms": 0.002,
+        "max_ms": 0.004
+      },
+      "pbkdf2_baseline": {
+        "mean_ms": 122.148,
+        "min_ms": 120.501,
+        "max_ms": 137.729
+      }
+    }
+  ],
+  "security_comparison": [
+    {
+      "scheme": "single_key",
+      "description": "K stored on one server / env var",
+      "compromise_threshold": 1,
+      "info_theoretic": false,
+      "single_point_failure": true,
+      "key_recovery_lt_t": true,
+      "total_latency_ms": 121.66,
+      "overhead_vs_single": 1.0,
+      "comm_bytes_recon": 0
+    },
+    {
+      "scheme": "pbkdf2_only",
+      "description": "Password-derived key, single holder",
+      "compromise_threshold": 1,
+      "info_theoretic": false,
+      "single_point_failure": true,
+      "key_recovery_lt_t": true,
+      "total_latency_ms": 121.66,
+      "overhead_vs_single": 1.0,
+      "comm_bytes_recon": 0
+    },
+    {
+      "scheme": "shamir_t3n5",
+      "description": "Shamir (t=3, n=5) \u2014 this work",
+      "compromise_threshold": 3,
+      "info_theoretic": true,
+      "single_point_failure": false,
+      "key_recovery_lt_t": false,
+      "total_latency_ms": 121.44,
+      "overhead_vs_single": 0.9982,
+      "comm_bytes_recon": 204
+    },
+    {
+      "scheme": "shamir_t5n10",
+      "description": "Shamir (t=5, n=10) \u2014 higher security",
+      "compromise_threshold": 5,
+      "info_theoretic": true,
+      "single_point_failure": false,
+      "key_recovery_lt_t": false,
+      "total_latency_ms": 122.82,
+      "overhead_vs_single": 1.0095,
+      "comm_bytes_recon": 340
+    }
+  ]
+}

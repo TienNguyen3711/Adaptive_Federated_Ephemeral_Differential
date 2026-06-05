@@ -1,0 +1,56 @@
+{
+  "fedgan_real": [
+    {
+      "noise_multiplier": 0.5,
+      "n_clients": 10,
+      "n_rounds": 20,
+      "final_d_loss": 3.092,
+      "final_g_loss": 0.9473,
+      "final_epsilon": 100.123,
+      "kl_trip_length": 22.15702,
+      "kl_speed": 26.04884,
+      "mean_frechet": 2.13214,
+      "mi_accuracy": 0.5,
+      "mi_advantage": 0.0
+    },
+    {
+      "noise_multiplier": 1.0,
+      "n_clients": 10,
+      "n_rounds": 20,
+      "final_d_loss": 3.0936,
+      "final_g_loss": 0.9474,
+      "final_epsilon": 33.6654,
+      "kl_trip_length": 22.15717,
+      "kl_speed": 26.04899,
+      "mean_frechet": 2.13478,
+      "mi_accuracy": 0.4167,
+      "mi_advantage": -0.0833
+    },
+    {
+      "noise_multiplier": 1.5,
+      "n_clients": 10,
+      "n_rounds": 20,
+      "final_d_loss": 3.0952,
+      "final_g_loss": 0.9476,
+      "final_epsilon": 20.5248,
+      "kl_trip_length": 22.15732,
+      "kl_speed": 26.04914,
+      "mean_frechet": 2.12678,
+      "mi_accuracy": 0.5,
+      "mi_advantage": 0.0
+    },
+    {
+      "noise_multiplier": 2.0,
+      "n_clients": 10,
+      "n_rounds": 20,
+      "final_d_loss": 3.0968,
+      "final_g_loss": 0.9477,
+      "final_epsilon": 14.0637,
+      "kl_trip_length": 22.15746,
+      "kl_speed": 26.04928,
+      "mean_frechet": 2.17948,
+      "mi_accuracy": 0.5,
+      "mi_advantage": 0.0
+    }
+  ]
+}

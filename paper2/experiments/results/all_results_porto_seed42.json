@@ -1,0 +1,332 @@
+{
+  "dataset": "porto",
+  "seed": 42,
+  "sadp": {
+    "sadp_comparison": [
+      {
+        "epsilon_base": 0.5,
+        "n_trajectories": 200,
+        "mean_budget_savings_pct": 45.802,
+        "theorem1_holds": true,
+        "sadp_made_high_m": 6195.073,
+        "uniform_made_high_m": 1641.584,
+        "planar_made_high_m": 2009.919,
+        "sadp_made_s1_m": 1533.355,
+        "uniform_made_s1_m": 1599.277,
+        "planar_made_s1_m": 1995.682,
+        "sadp_trip_dist_err_pct": 6081.76,
+        "uniform_trip_dist_err_pct": 2168.332,
+        "planar_trip_dist_err_pct": 2650.529,
+        "sadp_rq_mae_pct": 1.224,
+        "uniform_rq_mae_pct": 1.475,
+        "planar_rq_mae_pct": 1.36
+      },
+      {
+        "epsilon_base": 1.0,
+        "n_trajectories": 200,
+        "mean_budget_savings_pct": 45.802,
+        "theorem1_holds": true,
+        "sadp_made_high_m": 2993.877,
+        "uniform_made_high_m": 797.856,
+        "planar_made_high_m": 983.502,
+        "sadp_made_s1_m": 815.097,
+        "uniform_made_s1_m": 802.512,
+        "planar_made_s1_m": 981.007,
+        "sadp_trip_dist_err_pct": 2843.008,
+        "uniform_trip_dist_err_pct": 1010.041,
+        "planar_trip_dist_err_pct": 1276.142,
+        "sadp_rq_mae_pct": 1.316,
+        "uniform_rq_mae_pct": 1.319,
+        "planar_rq_mae_pct": 1.311
+      },
+      {
+        "epsilon_base": 2.0,
+        "n_trajectories": 200,
+        "mean_budget_savings_pct": 45.802,
+        "theorem1_holds": true,
+        "sadp_made_high_m": 1525.853,
+        "uniform_made_high_m": 410.805,
+        "planar_made_high_m": 506.183,
+        "sadp_made_s1_m": 389.841,
+        "uniform_made_s1_m": 400.397,
+        "planar_made_s1_m": 481.589,
+        "sadp_trip_dist_err_pct": 1402.587,
+        "uniform_trip_dist_err_pct": 479.941,
+        "planar_trip_dist_err_pct": 594.904,
+        "sadp_rq_mae_pct": 1.266,
+        "uniform_rq_mae_pct": 1.168,
+        "planar_rq_mae_pct": 1.212
+      }
+    ]
+  },
+  "dka": {
+    "dka_timing": [
+      {
+        "t": 2,
+        "n": 3,
+        "secret_size_bytes": 32,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.003,
+          "min_ms": 0.003,
+          "max_ms": 0.01
+        },
+        "reconstruct": {
+          "mean_ms": 0.089,
+          "min_ms": 0.084,
+          "max_ms": 0.11
+        },
+        "serialise": {
+          "mean_ms": 0.0,
+          "min_ms": 0.0,
+          "max_ms": 0.004
+        },
+        "deserialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.0,
+          "max_ms": 0.002
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 121.018,
+          "min_ms": 120.153,
+          "max_ms": 123.652
+        }
+      },
+      {
+        "t": 3,
+        "n": 5,
+        "secret_size_bytes": 32,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.006,
+          "min_ms": 0.005,
+          "max_ms": 0.017
+        },
+        "reconstruct": {
+          "mean_ms": 0.307,
+          "min_ms": 0.285,
+          "max_ms": 0.341
+        },
+        "serialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.006
+        },
+        "deserialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.002
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 122.041,
+          "min_ms": 119.767,
+          "max_ms": 145.723
+        }
+      },
+      {
+        "t": 5,
+        "n": 10,
+        "secret_size_bytes": 32,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.013,
+          "min_ms": 0.012,
+          "max_ms": 0.025
+        },
+        "reconstruct": {
+          "mean_ms": 1.837,
+          "min_ms": 1.714,
+          "max_ms": 1.944
+        },
+        "serialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.007
+        },
+        "deserialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.003
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 120.234,
+          "min_ms": 119.343,
+          "max_ms": 122.017
+        }
+      },
+      {
+        "t": 10,
+        "n": 20,
+        "secret_size_bytes": 32,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.037,
+          "min_ms": 0.035,
+          "max_ms": 0.047
+        },
+        "reconstruct": {
+          "mean_ms": 4.589,
+          "min_ms": 4.378,
+          "max_ms": 4.811
+        },
+        "serialise": {
+          "mean_ms": 0.002,
+          "min_ms": 0.002,
+          "max_ms": 0.007
+        },
+        "deserialise": {
+          "mean_ms": 0.002,
+          "min_ms": 0.002,
+          "max_ms": 0.004
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 120.447,
+          "min_ms": 119.299,
+          "max_ms": 123.804
+        }
+      }
+    ],
+    "security_comparison": [
+      {
+        "scheme": "single_key",
+        "description": "K stored on one server / env var",
+        "compromise_threshold": 1,
+        "info_theoretic": false,
+        "single_point_failure": true,
+        "key_recovery_lt_t": true,
+        "total_latency_ms": 120.66,
+        "overhead_vs_single": 1.0,
+        "comm_bytes_recon": 0
+      },
+      {
+        "scheme": "pbkdf2_only",
+        "description": "Password-derived key, single holder",
+        "compromise_threshold": 1,
+        "info_theoretic": false,
+        "single_point_failure": true,
+        "key_recovery_lt_t": true,
+        "total_latency_ms": 120.66,
+        "overhead_vs_single": 1.0,
+        "comm_bytes_recon": 0
+      },
+      {
+        "scheme": "shamir_t3n5",
+        "description": "Shamir (t=3, n=5) \u2014 this work",
+        "compromise_threshold": 3,
+        "info_theoretic": true,
+        "single_point_failure": false,
+        "key_recovery_lt_t": false,
+        "total_latency_ms": 120.62,
+        "overhead_vs_single": 0.9997,
+        "comm_bytes_recon": 204
+      },
+      {
+        "scheme": "shamir_t5n10",
+        "description": "Shamir (t=5, n=10) \u2014 higher security",
+        "compromise_threshold": 5,
+        "info_theoretic": true,
+        "single_point_failure": false,
+        "key_recovery_lt_t": false,
+        "total_latency_ms": 122.27,
+        "overhead_vs_single": 1.0133,
+        "comm_bytes_recon": 340
+      }
+    ]
+  },
+  "fedgan": {
+    "fedgan_real": [
+      {
+        "noise_multiplier": 0.5,
+        "n_clients": 10,
+        "n_rounds": 20,
+        "final_d_loss": 3.1167,
+        "final_g_loss": 0.9515,
+        "final_epsilon": 145.2599,
+        "kl_trip_length": 22.15696,
+        "kl_speed": 26.04878,
+        "mean_frechet": 2.13241,
+        "mi_accuracy": 0.5,
+        "mi_advantage": 0.0
+      },
+      {
+        "noise_multiplier": 1.0,
+        "n_clients": 10,
+        "n_rounds": 20,
+        "final_d_loss": 3.1146,
+        "final_g_loss": 0.9515,
+        "final_epsilon": 44.9497,
+        "kl_trip_length": 22.15708,
+        "kl_speed": 26.0489,
+        "mean_frechet": 2.13535,
+        "mi_accuracy": 0.4167,
+        "mi_advantage": -0.0833
+      },
+      {
+        "noise_multiplier": 1.5,
+        "n_clients": 10,
+        "n_rounds": 20,
+        "final_d_loss": 3.1124,
+        "final_g_loss": 0.9515,
+        "final_epsilon": 26.3737,
+        "kl_trip_length": 22.15719,
+        "kl_speed": 26.04901,
+        "mean_frechet": 2.12693,
+        "mi_accuracy": 0.5,
+        "mi_advantage": 0.0
+      },
+      {
+        "noise_multiplier": 2.0,
+        "n_clients": 10,
+        "n_rounds": 20,
+        "final_d_loss": 3.1102,
+        "final_g_loss": 0.9515,
+        "final_epsilon": 18.2952,
+        "kl_trip_length": 22.15731,
+        "kl_speed": 26.04913,
+        "mean_frechet": 2.17965,
+        "mi_accuracy": 0.5,
+        "mi_advantage": 0.0
+      }
+    ]
+  },
+  "e2e": {
+    "e2e_real": [
+      {
+        "epsilon_base": 0.5,
+        "dka_t": 3,
+        "dka_n": 5,
+        "n_trajectories": 20,
+        "sadp_score_ms": 0.259,
+        "sadp_noise_ms": 0.042,
+        "dka_derive_ms": 121.48,
+        "encrypt_ms": 0.047,
+        "total_ms": 121.828,
+        "mean_budget_savings_pct": 48.45
+      },
+      {
+        "epsilon_base": 1.0,
+        "dka_t": 3,
+        "dka_n": 5,
+        "n_trajectories": 20,
+        "sadp_score_ms": 0.253,
+        "sadp_noise_ms": 0.044,
+        "dka_derive_ms": 119.146,
+        "encrypt_ms": 0.042,
+        "total_ms": 119.485,
+        "mean_budget_savings_pct": 48.45
+      },
+      {
+        "epsilon_base": 2.0,
+        "dka_t": 3,
+        "dka_n": 5,
+        "n_trajectories": 20,
+        "sadp_score_ms": 0.261,
+        "sadp_noise_ms": 0.043,
+        "dka_derive_ms": 119.649,
+        "encrypt_ms": 0.043,
+        "total_ms": 119.996,
+        "mean_budget_savings_pct": 48.45
+      }
+    ]
+  }
+}

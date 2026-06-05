@@ -1,0 +1,332 @@
+{
+  "dataset": "tdrive",
+  "seed": 42,
+  "sadp": {
+    "sadp_comparison": [
+      {
+        "epsilon_base": 0.5,
+        "n_trajectories": 500,
+        "mean_budget_savings_pct": 37.091,
+        "theorem1_holds": true,
+        "sadp_made_high_m": 6447.789,
+        "uniform_made_high_m": 1529.459,
+        "planar_made_high_m": 1917.926,
+        "sadp_made_s1_m": 1492.028,
+        "uniform_made_s1_m": 1494.104,
+        "planar_made_s1_m": 1836.4,
+        "sadp_trip_dist_err_pct": 209.926,
+        "uniform_trip_dist_err_pct": 206.787,
+        "planar_trip_dist_err_pct": 212.874,
+        "sadp_rq_mae_pct": 1.722,
+        "uniform_rq_mae_pct": 1.4,
+        "planar_rq_mae_pct": 1.484
+      },
+      {
+        "epsilon_base": 1.0,
+        "n_trajectories": 500,
+        "mean_budget_savings_pct": 37.091,
+        "theorem1_holds": true,
+        "sadp_made_high_m": 3196.562,
+        "uniform_made_high_m": 782.443,
+        "planar_made_high_m": 962.939,
+        "sadp_made_s1_m": 752.684,
+        "uniform_made_s1_m": 738.978,
+        "planar_made_s1_m": 931.836,
+        "sadp_trip_dist_err_pct": 80.837,
+        "uniform_trip_dist_err_pct": 90.695,
+        "planar_trip_dist_err_pct": 115.758,
+        "sadp_rq_mae_pct": 1.443,
+        "uniform_rq_mae_pct": 1.205,
+        "planar_rq_mae_pct": 1.217
+      },
+      {
+        "epsilon_base": 2.0,
+        "n_trajectories": 500,
+        "mean_budget_savings_pct": 37.091,
+        "theorem1_holds": true,
+        "sadp_made_high_m": 1617.626,
+        "uniform_made_high_m": 382.387,
+        "planar_made_high_m": 478.19,
+        "sadp_made_s1_m": 377.605,
+        "uniform_made_s1_m": 369.94,
+        "planar_made_s1_m": 457.764,
+        "sadp_trip_dist_err_pct": 28.541,
+        "uniform_trip_dist_err_pct": 34.367,
+        "planar_trip_dist_err_pct": 40.79,
+        "sadp_rq_mae_pct": 1.207,
+        "uniform_rq_mae_pct": 0.952,
+        "planar_rq_mae_pct": 1.251
+      }
+    ]
+  },
+  "dka": {
+    "dka_timing": [
+      {
+        "t": 2,
+        "n": 3,
+        "secret_size_bytes": 32,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.004,
+          "min_ms": 0.003,
+          "max_ms": 0.011
+        },
+        "reconstruct": {
+          "mean_ms": 0.089,
+          "min_ms": 0.084,
+          "max_ms": 0.099
+        },
+        "serialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.0,
+          "max_ms": 0.005
+        },
+        "deserialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.0,
+          "max_ms": 0.008
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 119.916,
+          "min_ms": 118.833,
+          "max_ms": 124.563
+        }
+      },
+      {
+        "t": 3,
+        "n": 5,
+        "secret_size_bytes": 32,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.006,
+          "min_ms": 0.006,
+          "max_ms": 0.018
+        },
+        "reconstruct": {
+          "mean_ms": 0.311,
+          "min_ms": 0.286,
+          "max_ms": 0.351
+        },
+        "serialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.0,
+          "max_ms": 0.006
+        },
+        "deserialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.003
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 120.055,
+          "min_ms": 118.979,
+          "max_ms": 122.274
+        }
+      },
+      {
+        "t": 5,
+        "n": 10,
+        "secret_size_bytes": 32,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.014,
+          "min_ms": 0.013,
+          "max_ms": 0.025
+        },
+        "reconstruct": {
+          "mean_ms": 1.894,
+          "min_ms": 1.777,
+          "max_ms": 1.988
+        },
+        "serialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.006
+        },
+        "deserialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.003
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 120.212,
+          "min_ms": 119.198,
+          "max_ms": 124.268
+        }
+      },
+      {
+        "t": 10,
+        "n": 20,
+        "secret_size_bytes": 32,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.038,
+          "min_ms": 0.036,
+          "max_ms": 0.051
+        },
+        "reconstruct": {
+          "mean_ms": 4.686,
+          "min_ms": 4.486,
+          "max_ms": 4.834
+        },
+        "serialise": {
+          "mean_ms": 0.002,
+          "min_ms": 0.002,
+          "max_ms": 0.007
+        },
+        "deserialise": {
+          "mean_ms": 0.002,
+          "min_ms": 0.002,
+          "max_ms": 0.004
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 120.619,
+          "min_ms": 118.836,
+          "max_ms": 130.515
+        }
+      }
+    ],
+    "security_comparison": [
+      {
+        "scheme": "single_key",
+        "description": "K stored on one server / env var",
+        "compromise_threshold": 1,
+        "info_theoretic": false,
+        "single_point_failure": true,
+        "key_recovery_lt_t": true,
+        "total_latency_ms": 119.39,
+        "overhead_vs_single": 1.0,
+        "comm_bytes_recon": 0
+      },
+      {
+        "scheme": "pbkdf2_only",
+        "description": "Password-derived key, single holder",
+        "compromise_threshold": 1,
+        "info_theoretic": false,
+        "single_point_failure": true,
+        "key_recovery_lt_t": true,
+        "total_latency_ms": 119.39,
+        "overhead_vs_single": 1.0,
+        "comm_bytes_recon": 0
+      },
+      {
+        "scheme": "shamir_t3n5",
+        "description": "Shamir (t=3, n=5) \u2014 this work",
+        "compromise_threshold": 3,
+        "info_theoretic": true,
+        "single_point_failure": false,
+        "key_recovery_lt_t": false,
+        "total_latency_ms": 121.74,
+        "overhead_vs_single": 1.0197,
+        "comm_bytes_recon": 204
+      },
+      {
+        "scheme": "shamir_t5n10",
+        "description": "Shamir (t=5, n=10) \u2014 higher security",
+        "compromise_threshold": 5,
+        "info_theoretic": true,
+        "single_point_failure": false,
+        "key_recovery_lt_t": false,
+        "total_latency_ms": 123.72,
+        "overhead_vs_single": 1.0363,
+        "comm_bytes_recon": 340
+      }
+    ]
+  },
+  "fedgan": {
+    "fedgan_real": [
+      {
+        "noise_multiplier": 0.5,
+        "n_clients": 10,
+        "n_rounds": 20,
+        "final_d_loss": 0.6619,
+        "final_g_loss": 0.9593,
+        "final_epsilon": 119.2315,
+        "kl_trip_length": 22.15664,
+        "kl_speed": 26.04846,
+        "mean_frechet": 2.10877,
+        "mi_accuracy": 0.5,
+        "mi_advantage": 0.0
+      },
+      {
+        "noise_multiplier": 1.0,
+        "n_clients": 10,
+        "n_rounds": 20,
+        "final_d_loss": 0.6622,
+        "final_g_loss": 0.9587,
+        "final_epsilon": 38.4426,
+        "kl_trip_length": 22.15634,
+        "kl_speed": 26.04816,
+        "mean_frechet": 2.12956,
+        "mi_accuracy": 0.4167,
+        "mi_advantage": -0.0833
+      },
+      {
+        "noise_multiplier": 1.5,
+        "n_clients": 10,
+        "n_rounds": 20,
+        "final_d_loss": 0.6626,
+        "final_g_loss": 0.9581,
+        "final_epsilon": 23.4817,
+        "kl_trip_length": 22.15605,
+        "kl_speed": 26.04787,
+        "mean_frechet": 2.14619,
+        "mi_accuracy": 0.5,
+        "mi_advantage": 0.0
+      },
+      {
+        "noise_multiplier": 2.0,
+        "n_clients": 10,
+        "n_rounds": 20,
+        "final_d_loss": 0.663,
+        "final_g_loss": 0.9575,
+        "final_epsilon": 15.8551,
+        "kl_trip_length": 22.15575,
+        "kl_speed": 26.04757,
+        "mean_frechet": 2.13997,
+        "mi_accuracy": 0.5,
+        "mi_advantage": 0.0
+      }
+    ]
+  },
+  "e2e": {
+    "e2e_real": [
+      {
+        "epsilon_base": 0.5,
+        "dka_t": 3,
+        "dka_n": 5,
+        "n_trajectories": 20,
+        "sadp_score_ms": 1.821,
+        "sadp_noise_ms": 0.104,
+        "dka_derive_ms": 121.668,
+        "encrypt_ms": 0.064,
+        "total_ms": 123.657,
+        "mean_budget_savings_pct": 34.32
+      },
+      {
+        "epsilon_base": 1.0,
+        "dka_t": 3,
+        "dka_n": 5,
+        "n_trajectories": 20,
+        "sadp_score_ms": 1.791,
+        "sadp_noise_ms": 0.104,
+        "dka_derive_ms": 122.095,
+        "encrypt_ms": 0.06,
+        "total_ms": 124.05,
+        "mean_budget_savings_pct": 34.32
+      },
+      {
+        "epsilon_base": 2.0,
+        "dka_t": 3,
+        "dka_n": 5,
+        "n_trajectories": 20,
+        "sadp_score_ms": 1.773,
+        "sadp_noise_ms": 0.1,
+        "dka_derive_ms": 121.585,
+        "encrypt_ms": 0.056,
+        "total_ms": 123.514,
+        "mean_budget_savings_pct": 34.32
+      }
+    ]
+  }
+}
