@@ -1,0 +1,9 @@
+{
+  "variant": "centralised_no_dp",
+  "sigma": 0.01,
+  "n_clients": 1,
+  "n_rounds": 5,
+  "final_d_loss": 1.5723,
+  "mi_accuracy": 0.4167,
+  "mi_advantage": -0.0833
+}

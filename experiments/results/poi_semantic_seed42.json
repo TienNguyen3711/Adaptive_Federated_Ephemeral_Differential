@@ -1,0 +1,78 @@
+{
+  "seed": 42,
+  "n_poi_per_trajectory": 6,
+  "results": {
+    "geolife": {
+      "dataset": "geolife",
+      "n_trajectories": 1000,
+      "n_poi_total": 6000,
+      "n_poi_per_trajectory": 6,
+      "poi_category_counts": {
+        "transit": 1197,
+        "education": 898,
+        "political": 185,
+        "commercial": 2734,
+        "medical": 463,
+        "religious": 290,
+        "legal": 233
+      },
+      "epsilon_base": 1.0,
+      "mean_budget_savings_pct": 24.639,
+      "theorem1_holds": true,
+      "made_high_m": 2499.127,
+      "made_low_m": 720.857,
+      "targeting_ratio": 3.467,
+      "n_high_sensitivity_points": 974,
+      "n_low_sensitivity_points": 932,
+      "elapsed_s": 17.5
+    },
+    "tdrive": {
+      "dataset": "tdrive",
+      "n_trajectories": 500,
+      "n_poi_total": 3000,
+      "n_poi_per_trajectory": 6,
+      "poi_category_counts": {
+        "transit": 608,
+        "education": 445,
+        "political": 87,
+        "commercial": 1368,
+        "medical": 234,
+        "religious": 151,
+        "legal": 107
+      },
+      "epsilon_base": 1.0,
+      "mean_budget_savings_pct": 30.306,
+      "theorem1_holds": true,
+      "made_high_m": 2682.81,
+      "made_low_m": 710.824,
+      "targeting_ratio": 3.774,
+      "n_high_sensitivity_points": 465,
+      "n_low_sensitivity_points": 458,
+      "elapsed_s": 0.7
+    },
+    "porto": {
+      "dataset": "porto",
+      "n_trajectories": 2000,
+      "n_poi_total": 12000,
+      "n_poi_per_trajectory": 6,
+      "poi_category_counts": {
+        "transit": 2343,
+        "education": 1816,
+        "political": 372,
+        "commercial": 5443,
+        "medical": 941,
+        "religious": 602,
+        "legal": 483
+      },
+      "epsilon_base": 1.0,
+      "mean_budget_savings_pct": 28.417,
+      "theorem1_holds": true,
+      "made_high_m": 2572.246,
+      "made_low_m": 715.817,
+      "targeting_ratio": 3.593,
+      "n_high_sensitivity_points": 1924,
+      "n_low_sensitivity_points": 1983,
+      "elapsed_s": 1.0
+    }
+  }
+}

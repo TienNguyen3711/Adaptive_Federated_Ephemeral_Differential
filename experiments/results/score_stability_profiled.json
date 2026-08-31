@@ -1,0 +1,38 @@
+{
+  "seed": 42,
+  "n_users_per_dataset": 30,
+  "delta_f_m": 500.0,
+  "n_directions": 4,
+  "results": {
+    "geolife": {
+      "dataset": "geolife",
+      "n_eval_trajectories": 150,
+      "n_high_sensitivity_points_tested": 197,
+      "n_score_changed_by_any_direction": 197,
+      "pct_score_changed": 100.0,
+      "n_crossed_S3_threshold": 51,
+      "pct_crossed_S3_threshold": 25.89,
+      "max_abs_score_change_observed": 2.2177
+    },
+    "tdrive": {
+      "dataset": "tdrive",
+      "n_eval_trajectories": 121,
+      "n_high_sensitivity_points_tested": 180,
+      "n_score_changed_by_any_direction": 180,
+      "pct_score_changed": 100.0,
+      "n_crossed_S3_threshold": 56,
+      "pct_crossed_S3_threshold": 31.11,
+      "max_abs_score_change_observed": 2.3773
+    },
+    "porto": {
+      "dataset": "porto",
+      "n_eval_trajectories": 150,
+      "n_high_sensitivity_points_tested": 130,
+      "n_score_changed_by_any_direction": 130,
+      "pct_score_changed": 100.0,
+      "n_crossed_S3_threshold": 81,
+      "pct_crossed_S3_threshold": 62.31,
+      "max_abs_score_change_observed": 2.6502
+    }
+  }
+}

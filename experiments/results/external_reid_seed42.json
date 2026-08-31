@@ -1,0 +1,160 @@
+{
+  "seed": 42,
+  "n_users_target": 40,
+  "grid_cell_m": 150.0,
+  "reid_radius_m": 200.0,
+  "epsilon_base": 1.0,
+  "sensitivity_m": 500.0,
+  "results": {
+    "geolife": {
+      "dataset": "geolife",
+      "n_users": 40,
+      "elapsed_s": 0.4,
+      "conditions": {
+        "raw": {
+          "n_users": 40,
+          "median_displacement_m": 0.0,
+          "iqr_displacement_m": [
+            0.0,
+            0.0
+          ],
+          "mean_displacement_m": 0.0,
+          "ci95_displacement_m": 0.0,
+          "reid_success_rate_pct": 100.0,
+          "population_top1_linkage_acc_pct": 97.5
+        },
+        "uniform_dp": {
+          "n_users": 40,
+          "median_displacement_m": 336.0,
+          "iqr_displacement_m": [
+            150.3,
+            766.2
+          ],
+          "mean_displacement_m": 20818.0,
+          "ci95_displacement_m": 38603.9,
+          "reid_success_rate_pct": 30.0,
+          "population_top1_linkage_acc_pct": 70.0
+        },
+        "sadp": {
+          "n_users": 40,
+          "median_displacement_m": 723.4,
+          "iqr_displacement_m": [
+            422.1,
+            1545.8
+          ],
+          "mean_displacement_m": 1134.1,
+          "ci95_displacement_m": 357.1,
+          "reid_success_rate_pct": 10.0,
+          "population_top1_linkage_acc_pct": 50.0
+        }
+      },
+      "external_targeting_ratio": {
+        "made_near_true_home_work_m": 1741.45,
+        "made_elsewhere_m": 1480.91,
+        "n_near": 6902,
+        "n_elsewhere": 7425,
+        "targeting_ratio": 1.176
+      }
+    },
+    "tdrive": {
+      "dataset": "tdrive",
+      "n_users": 34,
+      "elapsed_s": 0.3,
+      "conditions": {
+        "raw": {
+          "n_users": 34,
+          "median_displacement_m": 0.0,
+          "iqr_displacement_m": [
+            0.0,
+            0.0
+          ],
+          "mean_displacement_m": 0.0,
+          "ci95_displacement_m": 0.0,
+          "reid_success_rate_pct": 100.0,
+          "population_top1_linkage_acc_pct": 100.0
+        },
+        "uniform_dp": {
+          "n_users": 34,
+          "median_displacement_m": 336.0,
+          "iqr_displacement_m": [
+            165.9,
+            5403.8
+          ],
+          "mean_displacement_m": 4594.9,
+          "ci95_displacement_m": 2597.9,
+          "reid_success_rate_pct": 26.5,
+          "population_top1_linkage_acc_pct": 67.6
+        },
+        "sadp": {
+          "n_users": 34,
+          "median_displacement_m": 4007.5,
+          "iqr_displacement_m": [
+            1687.5,
+            10772.3
+          ],
+          "mean_displacement_m": 9215.2,
+          "ci95_displacement_m": 4530.7,
+          "reid_success_rate_pct": 0.0,
+          "population_top1_linkage_acc_pct": 44.1
+        }
+      },
+      "external_targeting_ratio": {
+        "made_near_true_home_work_m": 2640.85,
+        "made_elsewhere_m": 1035.95,
+        "n_near": 3824,
+        "n_elsewhere": 8725,
+        "targeting_ratio": 2.549
+      }
+    },
+    "porto": {
+      "dataset": "porto",
+      "n_users": 39,
+      "elapsed_s": 0.1,
+      "conditions": {
+        "raw": {
+          "n_users": 39,
+          "median_displacement_m": 0.0,
+          "iqr_displacement_m": [
+            0.0,
+            0.0
+          ],
+          "mean_displacement_m": 0.0,
+          "ci95_displacement_m": 0.0,
+          "reid_success_rate_pct": 100.0,
+          "population_top1_linkage_acc_pct": 100.0
+        },
+        "uniform_dp": {
+          "n_users": 39,
+          "median_displacement_m": 914.0,
+          "iqr_displacement_m": [
+            475.2,
+            2100.7
+          ],
+          "mean_displacement_m": 1451.9,
+          "ci95_displacement_m": 464.3,
+          "reid_success_rate_pct": 7.7,
+          "population_top1_linkage_acc_pct": 23.1
+        },
+        "sadp": {
+          "n_users": 39,
+          "median_displacement_m": 1953.4,
+          "iqr_displacement_m": [
+            907.9,
+            3290.4
+          ],
+          "mean_displacement_m": 2271.5,
+          "ci95_displacement_m": 510.7,
+          "reid_success_rate_pct": 5.1,
+          "population_top1_linkage_acc_pct": 12.8
+        }
+      },
+      "external_targeting_ratio": {
+        "made_near_true_home_work_m": 1520.55,
+        "made_elsewhere_m": 1428.64,
+        "n_near": 1211,
+        "n_elsewhere": 3702,
+        "targeting_ratio": 1.064
+      }
+    }
+  }
+}

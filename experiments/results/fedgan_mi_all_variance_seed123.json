@@ -1,0 +1,692 @@
+{
+  "geolife": {
+    "fedgan_sigma_1.0": {
+      "n_trials": 8,
+      "trials": [
+        {
+          "final_d_loss": 0.4568,
+          "final_epsilon": 14.5815,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": 0.0143
+        },
+        {
+          "final_d_loss": 0.4894,
+          "final_epsilon": 14.5815,
+          "mi_advantage": 0.0833,
+          "mi_auc_advantage": 0.2222
+        },
+        {
+          "final_d_loss": 0.3391,
+          "final_epsilon": 14.5815,
+          "mi_advantage": 0.0833,
+          "mi_auc_advantage": 0.0833
+        },
+        {
+          "final_d_loss": 0.3604,
+          "final_epsilon": 14.5815,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": -0.1111
+        },
+        {
+          "final_d_loss": 0.4358,
+          "final_epsilon": 14.5815,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": 0.1389
+        },
+        {
+          "final_d_loss": 0.3991,
+          "final_epsilon": 14.5815,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": -0.125
+        },
+        {
+          "final_d_loss": 0.4683,
+          "final_epsilon": 14.5815,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": -0.1
+        },
+        {
+          "final_d_loss": 0.4445,
+          "final_epsilon": 14.5815,
+          "mi_advantage": -0.0833,
+          "mi_auc_advantage": -0.0833
+        }
+      ],
+      "mi_auc_advantage_mean": 0.0049,
+      "mi_auc_advantage_ci95": 0.1097,
+      "mi_advantage_mean": -0.0313,
+      "mi_advantage_ci95": 0.0828
+    },
+    "fedgan_sigma_4.0": {
+      "n_trials": 8,
+      "trials": [
+        {
+          "final_d_loss": 0.3483,
+          "final_epsilon": 3.0938,
+          "mi_advantage": -0.0833,
+          "mi_auc_advantage": 0.1667
+        },
+        {
+          "final_d_loss": 0.4108,
+          "final_epsilon": 3.0938,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": 0.0833
+        },
+        {
+          "final_d_loss": 0.3843,
+          "final_epsilon": 3.0938,
+          "mi_advantage": -0.0833,
+          "mi_auc_advantage": 0.1857
+        },
+        {
+          "final_d_loss": 0.4913,
+          "final_epsilon": 3.0938,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": -0.0714
+        },
+        {
+          "final_d_loss": 0.3642,
+          "final_epsilon": 3.0938,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": 0.1389
+        },
+        {
+          "final_d_loss": 0.3361,
+          "final_epsilon": 3.0938,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": 0.0278
+        },
+        {
+          "final_d_loss": 0.373,
+          "final_epsilon": 3.0938,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": 0.1
+        },
+        {
+          "final_d_loss": 0.3222,
+          "final_epsilon": 3.0938,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": -0.0429
+        }
+      ],
+      "mi_auc_advantage_mean": 0.0735,
+      "mi_auc_advantage_ci95": 0.0793,
+      "mi_advantage_mean": -0.0833,
+      "mi_advantage_ci95": 0.0645
+    },
+    "fedgan_sigma_8.0": {
+      "n_trials": 8,
+      "trials": [
+        {
+          "final_d_loss": 0.5788,
+          "final_epsilon": 1.5009,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": 0.1571
+        },
+        {
+          "final_d_loss": 0.363,
+          "final_epsilon": 1.5009,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": -0.1
+        },
+        {
+          "final_d_loss": 0.3779,
+          "final_epsilon": 1.5009,
+          "mi_advantage": -0.3333,
+          "mi_auc_advantage": -0.25
+        },
+        {
+          "final_d_loss": 0.5417,
+          "final_epsilon": 1.5009,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": -0.1562
+        },
+        {
+          "final_d_loss": 0.4427,
+          "final_epsilon": 1.5009,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": 0.375
+        },
+        {
+          "final_d_loss": 0.5303,
+          "final_epsilon": 1.5009,
+          "mi_advantage": 0.1667,
+          "mi_auc_advantage": 0.2222
+        },
+        {
+          "final_d_loss": 0.4491,
+          "final_epsilon": 1.5009,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": 0.0714
+        },
+        {
+          "final_d_loss": 0.4133,
+          "final_epsilon": 1.5009,
+          "mi_advantage": -0.0833,
+          "mi_auc_advantage": -0.1857
+        }
+      ],
+      "mi_auc_advantage_mean": 0.0167,
+      "mi_auc_advantage_ci95": 0.1867,
+      "mi_advantage_mean": -0.1146,
+      "mi_advantage_ci95": 0.1232
+    },
+    "centralised": {
+      "n_trials": 8,
+      "trials": [
+        {
+          "final_d_loss": 0.1446,
+          "final_epsilon": 98.4458,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": 0.375
+        },
+        {
+          "final_d_loss": 0.1759,
+          "final_epsilon": 98.4458,
+          "mi_advantage": -0.125,
+          "mi_auc_advantage": -0.1
+        },
+        {
+          "final_d_loss": 0.2151,
+          "final_epsilon": 98.4458,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": -0.1
+        },
+        {
+          "final_d_loss": 0.2202,
+          "final_epsilon": 98.4458,
+          "mi_advantage": -0.375,
+          "mi_auc_advantage": -0.2333
+        },
+        {
+          "final_d_loss": 0.1902,
+          "final_epsilon": 98.4458,
+          "mi_advantage": -0.125,
+          "mi_auc_advantage": -0.4333
+        },
+        {
+          "final_d_loss": 0.1452,
+          "final_epsilon": 98.4458,
+          "mi_advantage": -0.25,
+          "mi_auc_advantage": -0.25
+        },
+        {
+          "final_d_loss": 0.1899,
+          "final_epsilon": 98.4458,
+          "mi_advantage": -0.375,
+          "mi_auc_advantage": 0.3571
+        },
+        {
+          "final_d_loss": 0.1377,
+          "final_epsilon": 98.4458,
+          "mi_advantage": -0.125,
+          "mi_auc_advantage": -0.0333
+        }
+      ],
+      "mi_auc_advantage_mean": -0.0522,
+      "mi_auc_advantage_ci95": 0.239,
+      "mi_advantage_mean": -0.1719,
+      "mi_advantage_ci95": 0.1241
+    }
+  },
+  "tdrive": {
+    "fedgan_sigma_1.0": {
+      "n_trials": 8,
+      "trials": [
+        {
+          "final_d_loss": 1.0757,
+          "final_epsilon": 35.8794,
+          "mi_advantage": 0.25,
+          "mi_auc_advantage": 0.3571
+        },
+        {
+          "final_d_loss": 1.0777,
+          "final_epsilon": 35.8794,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": 0.1944
+        },
+        {
+          "final_d_loss": 1.2719,
+          "final_epsilon": 35.8794,
+          "mi_advantage": 0.0833,
+          "mi_auc_advantage": 0.1111
+        },
+        {
+          "final_d_loss": 1.6834,
+          "final_epsilon": 35.8794,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": 0.1111
+        },
+        {
+          "final_d_loss": 1.1114,
+          "final_epsilon": 35.8794,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": -0.2222
+        },
+        {
+          "final_d_loss": 1.539,
+          "final_epsilon": 35.8794,
+          "mi_advantage": 0.0833,
+          "mi_auc_advantage": 0.0625
+        },
+        {
+          "final_d_loss": 2.7048,
+          "final_epsilon": 35.8794,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": -0.2143
+        },
+        {
+          "final_d_loss": 1.5917,
+          "final_epsilon": 35.8794,
+          "mi_advantage": 0.25,
+          "mi_auc_advantage": 0.25
+        }
+      ],
+      "mi_auc_advantage_mean": 0.0812,
+      "mi_auc_advantage_ci95": 0.1728,
+      "mi_advantage_mean": 0.0625,
+      "mi_advantage_ci95": 0.1163
+    },
+    "fedgan_sigma_4.0": {
+      "n_trials": 8,
+      "trials": [
+        {
+          "final_d_loss": 0.814,
+          "final_epsilon": 6.6855,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": -0.0926
+        },
+        {
+          "final_d_loss": 1.4547,
+          "final_epsilon": 6.6855,
+          "mi_advantage": 0.25,
+          "mi_auc_advantage": 0.2778
+        },
+        {
+          "final_d_loss": 1.8022,
+          "final_epsilon": 6.6855,
+          "mi_advantage": 0.0833,
+          "mi_auc_advantage": 0.1286
+        },
+        {
+          "final_d_loss": 1.3275,
+          "final_epsilon": 6.6855,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": 0.2714
+        },
+        {
+          "final_d_loss": 0.9241,
+          "final_epsilon": 6.6855,
+          "mi_advantage": 0.1667,
+          "mi_auc_advantage": 0.0833
+        },
+        {
+          "final_d_loss": 0.9212,
+          "final_epsilon": 6.6855,
+          "mi_advantage": 0.0833,
+          "mi_auc_advantage": -0.0556
+        },
+        {
+          "final_d_loss": 1.8514,
+          "final_epsilon": 6.6855,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": 0.1
+        },
+        {
+          "final_d_loss": 0.7719,
+          "final_epsilon": 6.6855,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": -0.0429
+        }
+      ],
+      "mi_auc_advantage_mean": 0.0837,
+      "mi_auc_advantage_ci95": 0.119,
+      "mi_advantage_mean": 0.0729,
+      "mi_advantage_ci95": 0.0785
+    },
+    "fedgan_sigma_8.0": {
+      "n_trials": 8,
+      "trials": [
+        {
+          "final_d_loss": 1.5843,
+          "final_epsilon": 3.1524,
+          "mi_advantage": -0.0833,
+          "mi_auc_advantage": 0.1
+        },
+        {
+          "final_d_loss": 1.3045,
+          "final_epsilon": 3.1524,
+          "mi_advantage": -0.0833,
+          "mi_auc_advantage": 0.1286
+        },
+        {
+          "final_d_loss": 1.3119,
+          "final_epsilon": 3.1524,
+          "mi_advantage": 0.0833,
+          "mi_auc_advantage": 0.1875
+        },
+        {
+          "final_d_loss": 2.4362,
+          "final_epsilon": 3.1524,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": -0.0312
+        },
+        {
+          "final_d_loss": 1.2841,
+          "final_epsilon": 3.1524,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": 0.0938
+        },
+        {
+          "final_d_loss": 2.0619,
+          "final_epsilon": 3.1524,
+          "mi_advantage": 0.25,
+          "mi_auc_advantage": 0.0
+        },
+        {
+          "final_d_loss": 1.5773,
+          "final_epsilon": 3.1524,
+          "mi_advantage": -0.0833,
+          "mi_auc_advantage": -0.0143
+        },
+        {
+          "final_d_loss": 0.8407,
+          "final_epsilon": 3.1524,
+          "mi_advantage": 0.0833,
+          "mi_auc_advantage": 0.0714
+        }
+      ],
+      "mi_auc_advantage_mean": 0.067,
+      "mi_auc_advantage_ci95": 0.0639,
+      "mi_advantage_mean": 0.0208,
+      "mi_advantage_ci95": 0.0968
+    },
+    "centralised": {
+      "n_trials": 8,
+      "trials": [
+        {
+          "final_d_loss": 1.2417,
+          "final_epsilon": 12153.7654,
+          "mi_advantage": 0.125,
+          "mi_auc_advantage": -0.0625
+        },
+        {
+          "final_d_loss": 1.8462,
+          "final_epsilon": 12153.7654,
+          "mi_advantage": -0.125,
+          "mi_auc_advantage": 0.2333
+        },
+        {
+          "final_d_loss": 1.053,
+          "final_epsilon": 12153.7654,
+          "mi_advantage": -0.25,
+          "mi_auc_advantage": 0.0333
+        },
+        {
+          "final_d_loss": 1.4777,
+          "final_epsilon": 12153.7654,
+          "mi_advantage": -0.25,
+          "mi_auc_advantage": -0.0333
+        },
+        {
+          "final_d_loss": 1.6031,
+          "final_epsilon": 12153.7654,
+          "mi_advantage": -0.125,
+          "mi_auc_advantage": -0.1
+        },
+        {
+          "final_d_loss": 1.5536,
+          "final_epsilon": 12153.7654,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": -0.0833
+        },
+        {
+          "final_d_loss": 1.4864,
+          "final_epsilon": 12153.7654,
+          "mi_advantage": 0.125,
+          "mi_auc_advantage": 0.3571
+        },
+        {
+          "final_d_loss": 0.7007,
+          "final_epsilon": 12153.7654,
+          "mi_advantage": -0.25,
+          "mi_auc_advantage": -0.3
+        }
+      ],
+      "mi_auc_advantage_mean": 0.0056,
+      "mi_auc_advantage_ci95": 0.1716,
+      "mi_advantage_mean": -0.0938,
+      "mi_advantage_ci95": 0.134
+    }
+  },
+  "porto": {
+    "fedgan_sigma_1.0": {
+      "n_trials": 8,
+      "trials": [
+        {
+          "final_d_loss": 2.1214,
+          "final_epsilon": 35.8794,
+          "mi_advantage": -0.0833,
+          "mi_auc_advantage": -0.0143
+        },
+        {
+          "final_d_loss": 1.3172,
+          "final_epsilon": 35.8794,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": 0.0
+        },
+        {
+          "final_d_loss": 1.7308,
+          "final_epsilon": 35.8794,
+          "mi_advantage": -0.0833,
+          "mi_auc_advantage": -0.25
+        },
+        {
+          "final_d_loss": 1.5022,
+          "final_epsilon": 35.8794,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": -0.1389
+        },
+        {
+          "final_d_loss": 1.0889,
+          "final_epsilon": 35.8794,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": -0.1111
+        },
+        {
+          "final_d_loss": 1.2418,
+          "final_epsilon": 35.8794,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": -0.0312
+        },
+        {
+          "final_d_loss": 0.995,
+          "final_epsilon": 35.8794,
+          "mi_advantage": 0.0833,
+          "mi_auc_advantage": 0.0143
+        },
+        {
+          "final_d_loss": 1.3806,
+          "final_epsilon": 35.8794,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": -0.0833
+        }
+      ],
+      "mi_auc_advantage_mean": -0.0768,
+      "mi_auc_advantage_ci95": 0.0743,
+      "mi_advantage_mean": -0.0729,
+      "mi_advantage_ci95": 0.0785
+    },
+    "fedgan_sigma_4.0": {
+      "n_trials": 8,
+      "trials": [
+        {
+          "final_d_loss": 2.2143,
+          "final_epsilon": 6.6855,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": -0.0185
+        },
+        {
+          "final_d_loss": 1.4455,
+          "final_epsilon": 6.6855,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": -0.3056
+        },
+        {
+          "final_d_loss": 1.0529,
+          "final_epsilon": 6.6855,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": -0.1
+        },
+        {
+          "final_d_loss": 1.1025,
+          "final_epsilon": 6.6855,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": 0.0714
+        },
+        {
+          "final_d_loss": 1.3176,
+          "final_epsilon": 6.6855,
+          "mi_advantage": -0.25,
+          "mi_auc_advantage": -0.25
+        },
+        {
+          "final_d_loss": 0.8647,
+          "final_epsilon": 6.6855,
+          "mi_advantage": -0.0833,
+          "mi_auc_advantage": -0.0833
+        },
+        {
+          "final_d_loss": 1.7602,
+          "final_epsilon": 6.6855,
+          "mi_advantage": 0.0833,
+          "mi_auc_advantage": 0.1571
+        },
+        {
+          "final_d_loss": 1.5474,
+          "final_epsilon": 6.6855,
+          "mi_advantage": -0.0833,
+          "mi_auc_advantage": -0.2714
+        }
+      ],
+      "mi_auc_advantage_mean": -0.1,
+      "mi_auc_advantage_ci95": 0.1401,
+      "mi_advantage_mean": -0.0833,
+      "mi_advantage_ci95": 0.0912
+    },
+    "fedgan_sigma_8.0": {
+      "n_trials": 8,
+      "trials": [
+        {
+          "final_d_loss": 0.9584,
+          "final_epsilon": 3.1524,
+          "mi_advantage": -0.0833,
+          "mi_auc_advantage": -0.1857
+        },
+        {
+          "final_d_loss": 1.2075,
+          "final_epsilon": 3.1524,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": -0.1857
+        },
+        {
+          "final_d_loss": 2.1958,
+          "final_epsilon": 3.1524,
+          "mi_advantage": -0.0833,
+          "mi_auc_advantage": 0.25
+        },
+        {
+          "final_d_loss": 1.0465,
+          "final_epsilon": 3.1524,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": 0.2188
+        },
+        {
+          "final_d_loss": 2.2305,
+          "final_epsilon": 3.1524,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": 0.3438
+        },
+        {
+          "final_d_loss": 1.2402,
+          "final_epsilon": 3.1524,
+          "mi_advantage": 0.0833,
+          "mi_auc_advantage": -0.0278
+        },
+        {
+          "final_d_loss": 1.2561,
+          "final_epsilon": 3.1524,
+          "mi_advantage": -0.0833,
+          "mi_auc_advantage": 0.1
+        },
+        {
+          "final_d_loss": 1.223,
+          "final_epsilon": 3.1524,
+          "mi_advantage": -0.1667,
+          "mi_auc_advantage": 0.0143
+        }
+      ],
+      "mi_auc_advantage_mean": 0.066,
+      "mi_auc_advantage_ci95": 0.1653,
+      "mi_advantage_mean": -0.1042,
+      "mi_advantage_ci95": 0.0721
+    },
+    "centralised": {
+      "n_trials": 8,
+      "trials": [
+        {
+          "final_d_loss": 1.171,
+          "final_epsilon": 18721.0778,
+          "mi_advantage": 0.125,
+          "mi_auc_advantage": 0.0625
+        },
+        {
+          "final_d_loss": 1.2969,
+          "final_epsilon": 18721.0778,
+          "mi_advantage": -0.375,
+          "mi_auc_advantage": -0.3667
+        },
+        {
+          "final_d_loss": 1.1522,
+          "final_epsilon": 18721.0778,
+          "mi_advantage": 0.0,
+          "mi_auc_advantage": -0.1
+        },
+        {
+          "final_d_loss": 0.9137,
+          "final_epsilon": 18721.0778,
+          "mi_advantage": -0.25,
+          "mi_auc_advantage": -0.1
+        },
+        {
+          "final_d_loss": 1.3562,
+          "final_epsilon": 18721.0778,
+          "mi_advantage": -0.125,
+          "mi_auc_advantage": -0.1667
+        },
+        {
+          "final_d_loss": 1.1423,
+          "final_epsilon": 18721.0778,
+          "mi_advantage": -0.125,
+          "mi_auc_advantage": 0.0833
+        },
+        {
+          "final_d_loss": 1.2186,
+          "final_epsilon": 18721.0778,
+          "mi_advantage": -0.375,
+          "mi_auc_advantage": -0.3571
+        },
+        {
+          "final_d_loss": 3.9966,
+          "final_epsilon": 18721.0778,
+          "mi_advantage": -0.25,
+          "mi_auc_advantage": -0.3
+        }
+      ],
+      "mi_auc_advantage_mean": -0.1556,
+      "mi_auc_advantage_ci95": 0.1472,
+      "mi_advantage_mean": -0.1719,
+      "mi_advantage_ci95": 0.1472
+    }
+  }
+}

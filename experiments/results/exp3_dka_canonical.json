@@ -1,0 +1,461 @@
+{
+  "repetitions": 50,
+  "secret_sizes": [
+    16,
+    32,
+    64
+  ],
+  "configs": [
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      5,
+      10
+    ],
+    [
+      10,
+      20
+    ]
+  ],
+  "result": {
+    "correctness": {
+      "t2_n3": {
+        "t": 2,
+        "n": 3,
+        "reconstruct_correct": true,
+        "threshold_security_holds": true,
+        "passes": 20,
+        "repetitions": 20
+      },
+      "t3_n5": {
+        "t": 3,
+        "n": 5,
+        "reconstruct_correct": true,
+        "threshold_security_holds": true,
+        "passes": 20,
+        "repetitions": 20
+      },
+      "t5_n10": {
+        "t": 5,
+        "n": 10,
+        "reconstruct_correct": true,
+        "threshold_security_holds": true,
+        "passes": 20,
+        "repetitions": 20
+      },
+      "t10_n20": {
+        "t": 10,
+        "n": 20,
+        "reconstruct_correct": true,
+        "threshold_security_holds": true,
+        "passes": 20,
+        "repetitions": 20
+      },
+      "all_correct": true
+    },
+    "timing": [
+      {
+        "t": 2,
+        "n": 3,
+        "secret_size_bytes": 16,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.003,
+          "min_ms": 0.003,
+          "max_ms": 0.012
+        },
+        "reconstruct": {
+          "mean_ms": 0.086,
+          "min_ms": 0.083,
+          "max_ms": 0.104
+        },
+        "serialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.0,
+          "max_ms": 0.005
+        },
+        "deserialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.0,
+          "max_ms": 0.002
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 122.758,
+          "min_ms": 120.022,
+          "max_ms": 132.859
+        },
+        "recon_vs_pbkdf2_ratio": 0.0007,
+        "total_dka_ms": 0.091
+      },
+      {
+        "t": 2,
+        "n": 3,
+        "secret_size_bytes": 32,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.004,
+          "min_ms": 0.003,
+          "max_ms": 0.024
+        },
+        "reconstruct": {
+          "mean_ms": 0.085,
+          "min_ms": 0.083,
+          "max_ms": 0.101
+        },
+        "serialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.0,
+          "max_ms": 0.011
+        },
+        "deserialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.004
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 121.328,
+          "min_ms": 119.603,
+          "max_ms": 125.342
+        },
+        "recon_vs_pbkdf2_ratio": 0.0007,
+        "total_dka_ms": 0.091
+      },
+      {
+        "t": 2,
+        "n": 3,
+        "secret_size_bytes": 64,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.003,
+          "min_ms": 0.003,
+          "max_ms": 0.013
+        },
+        "reconstruct": {
+          "mean_ms": 0.085,
+          "min_ms": 0.084,
+          "max_ms": 0.111
+        },
+        "serialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.0,
+          "max_ms": 0.005
+        },
+        "deserialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.002
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 120.587,
+          "min_ms": 119.02,
+          "max_ms": 122.842
+        },
+        "recon_vs_pbkdf2_ratio": 0.0007,
+        "total_dka_ms": 0.09
+      },
+      {
+        "t": 3,
+        "n": 5,
+        "secret_size_bytes": 16,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.006,
+          "min_ms": 0.006,
+          "max_ms": 0.017
+        },
+        "reconstruct": {
+          "mean_ms": 0.301,
+          "min_ms": 0.279,
+          "max_ms": 0.341
+        },
+        "serialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.005
+        },
+        "deserialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.002
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 120.589,
+          "min_ms": 119.439,
+          "max_ms": 122.833
+        },
+        "recon_vs_pbkdf2_ratio": 0.0025,
+        "total_dka_ms": 0.309
+      },
+      {
+        "t": 3,
+        "n": 5,
+        "secret_size_bytes": 32,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.006,
+          "min_ms": 0.006,
+          "max_ms": 0.017
+        },
+        "reconstruct": {
+          "mean_ms": 0.303,
+          "min_ms": 0.286,
+          "max_ms": 0.339
+        },
+        "serialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.006
+        },
+        "deserialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.002
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 121.379,
+          "min_ms": 119.393,
+          "max_ms": 124.512
+        },
+        "recon_vs_pbkdf2_ratio": 0.0025,
+        "total_dka_ms": 0.311
+      },
+      {
+        "t": 3,
+        "n": 5,
+        "secret_size_bytes": 64,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.006,
+          "min_ms": 0.006,
+          "max_ms": 0.017
+        },
+        "reconstruct": {
+          "mean_ms": 0.302,
+          "min_ms": 0.287,
+          "max_ms": 0.331
+        },
+        "serialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.007
+        },
+        "deserialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.003
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 120.753,
+          "min_ms": 119.618,
+          "max_ms": 122.705
+        },
+        "recon_vs_pbkdf2_ratio": 0.0025,
+        "total_dka_ms": 0.31
+      },
+      {
+        "t": 5,
+        "n": 10,
+        "secret_size_bytes": 16,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.013,
+          "min_ms": 0.013,
+          "max_ms": 0.027
+        },
+        "reconstruct": {
+          "mean_ms": 1.83,
+          "min_ms": 1.755,
+          "max_ms": 1.927
+        },
+        "serialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.007
+        },
+        "deserialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.003
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 121.512,
+          "min_ms": 119.191,
+          "max_ms": 124.599
+        },
+        "recon_vs_pbkdf2_ratio": 0.0151,
+        "total_dka_ms": 1.845
+      },
+      {
+        "t": 5,
+        "n": 10,
+        "secret_size_bytes": 32,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.013,
+          "min_ms": 0.013,
+          "max_ms": 0.024
+        },
+        "reconstruct": {
+          "mean_ms": 1.81,
+          "min_ms": 1.734,
+          "max_ms": 1.894
+        },
+        "serialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.006
+        },
+        "deserialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.003
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 120.912,
+          "min_ms": 119.269,
+          "max_ms": 124.707
+        },
+        "recon_vs_pbkdf2_ratio": 0.015,
+        "total_dka_ms": 1.825
+      },
+      {
+        "t": 5,
+        "n": 10,
+        "secret_size_bytes": 64,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.015,
+          "min_ms": 0.013,
+          "max_ms": 0.027
+        },
+        "reconstruct": {
+          "mean_ms": 1.913,
+          "min_ms": 1.81,
+          "max_ms": 2.167
+        },
+        "serialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.006
+        },
+        "deserialise": {
+          "mean_ms": 0.001,
+          "min_ms": 0.001,
+          "max_ms": 0.003
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 120.557,
+          "min_ms": 119.115,
+          "max_ms": 125.539
+        },
+        "recon_vs_pbkdf2_ratio": 0.0159,
+        "total_dka_ms": 1.93
+      },
+      {
+        "t": 10,
+        "n": 20,
+        "secret_size_bytes": 16,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.037,
+          "min_ms": 0.035,
+          "max_ms": 0.047
+        },
+        "reconstruct": {
+          "mean_ms": 4.619,
+          "min_ms": 4.475,
+          "max_ms": 4.83
+        },
+        "serialise": {
+          "mean_ms": 0.002,
+          "min_ms": 0.002,
+          "max_ms": 0.006
+        },
+        "deserialise": {
+          "mean_ms": 0.002,
+          "min_ms": 0.002,
+          "max_ms": 0.004
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 120.834,
+          "min_ms": 119.57,
+          "max_ms": 123.883
+        },
+        "recon_vs_pbkdf2_ratio": 0.0382,
+        "total_dka_ms": 4.66
+      },
+      {
+        "t": 10,
+        "n": 20,
+        "secret_size_bytes": 32,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.037,
+          "min_ms": 0.035,
+          "max_ms": 0.056
+        },
+        "reconstruct": {
+          "mean_ms": 4.536,
+          "min_ms": 4.386,
+          "max_ms": 4.718
+        },
+        "serialise": {
+          "mean_ms": 0.002,
+          "min_ms": 0.002,
+          "max_ms": 0.01
+        },
+        "deserialise": {
+          "mean_ms": 0.002,
+          "min_ms": 0.002,
+          "max_ms": 0.006
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 120.747,
+          "min_ms": 119.52,
+          "max_ms": 124.21
+        },
+        "recon_vs_pbkdf2_ratio": 0.0376,
+        "total_dka_ms": 4.577
+      },
+      {
+        "t": 10,
+        "n": 20,
+        "secret_size_bytes": 64,
+        "repetitions": 50,
+        "split": {
+          "mean_ms": 0.037,
+          "min_ms": 0.035,
+          "max_ms": 0.06
+        },
+        "reconstruct": {
+          "mean_ms": 4.549,
+          "min_ms": 4.426,
+          "max_ms": 4.764
+        },
+        "serialise": {
+          "mean_ms": 0.002,
+          "min_ms": 0.002,
+          "max_ms": 0.006
+        },
+        "deserialise": {
+          "mean_ms": 0.002,
+          "min_ms": 0.002,
+          "max_ms": 0.004
+        },
+        "pbkdf2_baseline": {
+          "mean_ms": 121.229,
+          "min_ms": 119.429,
+          "max_ms": 131.503
+        },
+        "recon_vs_pbkdf2_ratio": 0.0375,
+        "total_dka_ms": 4.59
+      }
+    ]
+  }
+}

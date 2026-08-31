@@ -1,0 +1,33 @@
+{
+  "fedgan_extended": [
+    {
+      "noise_multiplier": 4.0,
+      "n_clients": 10,
+      "n_rounds": 20,
+      "final_d_loss": 0.3724,
+      "final_g_loss": 1.3342,
+      "final_epsilon": 6.0032,
+      "kl_trip_length": 22.15947,
+      "kl_speed": 26.05129,
+      "mean_frechet": 2.11521,
+      "mi_accuracy": 0.5,
+      "mi_advantage": 0.0,
+      "elapsed_s": 21.93
+    },
+    {
+      "noise_multiplier": 8.0,
+      "n_clients": 10,
+      "n_rounds": 20,
+      "final_d_loss": 0.3643,
+      "final_g_loss": 1.3593,
+      "final_epsilon": 2.8417,
+      "kl_trip_length": 22.15506,
+      "kl_speed": 26.04688,
+      "mean_frechet": 2.14536,
+      "mi_accuracy": 0.4167,
+      "mi_advantage": -0.0833,
+      "elapsed_s": 22.03
+    }
+  ],
+  "seed": 42
+}
