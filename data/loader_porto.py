@@ -27,17 +27,28 @@ _LAT_MIN, _LAT_MAX = 41.0, 41.3
 _LON_MIN, _LON_MAX = -8.75, -8.5
 
 
-def _parse_polyline(raw: str) -> List[Tuple[float, float]]:
-    """Parse POLYLINE JSON string → list of (lat, lon)."""
+_SAMPLE_INTERVAL_S = 15.0  # POLYLINE is sampled every 15s (per dataset docs)
+
+
+def _parse_polyline(raw: str, keep_timestamps: bool = False) -> List[Tuple]:
+    """Parse POLYLINE JSON string -> list of (lat, lon), or (lat, lon,
+    rel_seconds) triples if keep_timestamps=True. Porto has no per-point
+    timestamps in the source data; rel_seconds is *reconstructed* from the
+    dataset's documented fixed 15s sampling interval (index * 15.0), not a
+    genuine recorded timestamp.
+    """
     try:
         pts = json.loads(raw)
         result = []
-        for p in pts:
+        for i, p in enumerate(pts):
             if len(p) < 2:
                 continue
             lon, lat = float(p[0]), float(p[1])
             if _LAT_MIN <= lat <= _LAT_MAX and _LON_MIN <= lon <= _LON_MAX:
-                result.append((lat, lon))
+                if keep_timestamps:
+                    result.append((lat, lon, i * _SAMPLE_INTERVAL_S))
+                else:
+                    result.append((lat, lon))
         return result
     except (json.JSONDecodeError, TypeError, ValueError):
         return []
@@ -59,15 +70,18 @@ def iter_trips(
     n_trips: Optional[int] = None,
     min_points: int = 10,
     skip_missing: bool = True,
+    keep_timestamps: bool = False,
 ) -> Iterator[Tuple[str, str, List[Tuple[float, float]]]]:
     """
     Yield (trip_id, taxi_id, trajectory) for each valid trip.
 
     Parameters
     ----------
-    n_trips      : max trips to read (None = all ~1.7M)
-    min_points   : skip trips with fewer than this many valid points
-    skip_missing : skip rows where MISSING_DATA == True
+    n_trips         : max trips to read (None = all ~1.7M)
+    min_points      : skip trips with fewer than this many valid points
+    skip_missing    : skip rows where MISSING_DATA == True
+    keep_timestamps : if True, trajectory points are (lat, lon, rel_seconds)
+                       triples reconstructed from the 15s sampling interval
     """
     path = csv_path or _DATA_ROOT
     count = 0
@@ -78,7 +92,7 @@ def iter_trips(
                 break
             if skip_missing and row.get("MISSING_DATA", "").strip() == "True":
                 continue
-            pts = _parse_polyline(row.get("POLYLINE", "[]"))
+            pts = _parse_polyline(row.get("POLYLINE", "[]"), keep_timestamps=keep_timestamps)
             if len(pts) < min_points:
                 continue
             yield row["TRIP_ID"], row["TAXI_ID"], pts
@@ -153,6 +167,91 @@ def load_flat(
             break
 
     return rng.sample(all_trips, min(n_trips, len(all_trips)))
+
+
+def load_flat_with_timestamps(
+    csv_path: str = None,
+    n_trips: int = 5000,
+    min_points: int = 20,
+    seed: int = 42,
+) -> List[List[Tuple[float, float, float]]]:
+    """
+    Same as load_flat(), but each trip's points are (lat, lon, rel_seconds)
+    triples, reconstructed from the dataset's documented fixed 15s sampling
+    interval (not genuine per-point timestamps) — for Temporal Obfuscation.
+    """
+    import random
+    rng = random.Random(seed)
+
+    all_trips = []
+    for _, _, pts in iter_trips(csv_path or _DATA_ROOT,
+                                n_trips=n_trips * 3,
+                                min_points=min_points,
+                                keep_timestamps=True):
+        all_trips.append(pts)
+        if len(all_trips) >= n_trips * 3:
+            break
+
+    return rng.sample(all_trips, min(n_trips, len(all_trips)))
+
+
+def load_flat_with_profile_split(
+    csv_path: str = None,
+    n_taxis: int = 50,
+    trips_per_taxi: int = 20,
+    min_points: int = 20,
+    seed: int = 42,
+    max_eval_per_user: int = 10,
+):
+    """
+    Per-taxi profile/eval split for the historical-profile SA-DP scorer
+    (adaptive_dp.build_profile / score_trajectory(profile=...)). See
+    loader_geolife.load_flat_with_profile_split() for the full contract
+    (incl. why the result is shuffled and capped per taxi).
+
+    Porto has no per-user directory structure; trips are grouped by
+    TAXI_ID as read from the CSV (which is itself chronologically
+    ordered), so the earlier-read trips per taxi build the profile and
+    later-read trips are the eval trajectories -- the same "earlier half
+    of history" split used for GeoLife/T-Drive.
+    """
+    from collections import defaultdict
+    import random
+    from Adaptive_Federated_Ephemeral_Differential.adaptive_dp import build_profile
+
+    rng = random.Random(seed)
+    path = csv_path or _DATA_ROOT
+    taxi_trips: dict = defaultdict(list)
+
+    max_read = n_taxis * trips_per_taxi * 5
+    for _, taxi_id, pts in iter_trips(
+        path, n_trips=max_read, min_points=min_points, keep_timestamps=True
+    ):
+        if len(taxi_trips[taxi_id]) < trips_per_taxi:
+            taxi_trips[taxi_id].append(pts)
+
+    eligible = [t for t, trips in taxi_trips.items() if len(trips) >= 2]
+    selected = rng.sample(eligible, min(n_taxis, len(eligible)))
+
+    eval_segs, eval_ts, eval_profiles = [], [], []
+    for tid in selected:
+        segs = taxi_trips[tid]
+        n_profile = max(1, len(segs) // 2)
+        profile_segs, rest_segs = segs[:n_profile], segs[n_profile:]
+        profile_trajs = [[(p[0], p[1]) for p in s] for s in profile_segs]
+        profile_ts    = [[p[2] for p in s] for s in profile_segs]
+        profile = build_profile(profile_trajs, profile_ts)
+        for s in rest_segs[:max_eval_per_user]:
+            eval_segs.append([(p[0], p[1]) for p in s])
+            eval_ts.append([p[2] for p in s])
+            eval_profiles.append(profile)
+
+    order = list(range(len(eval_segs)))
+    rng.shuffle(order)
+    eval_segs     = [eval_segs[i] for i in order]
+    eval_ts       = [eval_ts[i] for i in order]
+    eval_profiles = [eval_profiles[i] for i in order]
+    return eval_segs, eval_ts, eval_profiles
 
 
 if __name__ == "__main__":

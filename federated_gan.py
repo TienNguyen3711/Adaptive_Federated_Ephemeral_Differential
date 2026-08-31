@@ -397,19 +397,27 @@ class MembershipInferenceAttack:
         self.threshold = threshold
         self._w: Optional[np.ndarray] = None
         self._b: float = 0.0
+        self._mu: Optional[np.ndarray] = None
+        self._sigma: Optional[np.ndarray] = None
 
     def _fit_logistic(self, X: np.ndarray, y: np.ndarray,
-                      lr: float = 0.05, epochs: int = 500):
+                      lr: float = 0.05, epochs: int = 500,
+                      l2: float = 1e-2):
         n = len(X)
-        w = np.zeros(X.shape[1])
+        mu    = X.mean(axis=0)
+        sigma = X.std(axis=0) + 1e-8
+        Xs    = (X - mu) / sigma
+        w = np.zeros(Xs.shape[1])
         b = 0.0
         for _ in range(epochs):
-            p   = _sigmoid(X @ w + b)
+            p   = _sigmoid(Xs @ w + b)
             err = (p - y) / n
-            w  -= lr * (X.T @ err)
+            w  -= lr * (Xs.T @ err + l2 * w)
             b  -= lr * err.sum()
         self._w = w
         self._b = b
+        self._mu = mu
+        self._sigma = sigma
 
     def fit_and_evaluate(
         self,
@@ -433,7 +441,8 @@ class MembershipInferenceAttack:
 
         self._fit_logistic(Xtr, ytr)
 
-        proba = _sigmoid(Xte @ self._w + self._b)
+        Xte_s = (Xte - self._mu) / self._sigma
+        proba = _sigmoid(Xte_s @ self._w + self._b)
         pred  = (proba >= self.threshold).astype(float)
         acc   = float((pred == yte).mean())
 
@@ -445,6 +454,7 @@ class MembershipInferenceAttack:
             "attack_accuracy": acc,
             "advantage":       acc - 0.5,
             "auc":             auc,
+            "auc_advantage":   auc - 0.5,
             "n_member":        len(s_m),
             "n_nonmember":     len(s_nm),
         }

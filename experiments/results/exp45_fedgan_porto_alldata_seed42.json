@@ -10,8 +10,8 @@
       "kl_trip_length": 22.15702,
       "kl_speed": 26.04884,
       "mean_frechet": 2.13214,
-      "mi_accuracy": 0.5,
-      "mi_advantage": 0.0
+      "mi_accuracy": 0.5833,
+      "mi_advantage": 0.0833
     },
     {
       "noise_multiplier": 1.0,
@@ -36,8 +36,8 @@
       "kl_trip_length": 22.15732,
       "kl_speed": 26.04914,
       "mean_frechet": 2.12678,
-      "mi_accuracy": 0.5,
-      "mi_advantage": 0.0
+      "mi_accuracy": 0.3333,
+      "mi_advantage": -0.1667
     },
     {
       "noise_multiplier": 2.0,
@@ -49,8 +49,34 @@
       "kl_trip_length": 22.15746,
       "kl_speed": 26.04928,
       "mean_frechet": 2.17948,
-      "mi_accuracy": 0.5,
-      "mi_advantage": 0.0
+      "mi_accuracy": 0.4167,
+      "mi_advantage": -0.0833
+    },
+    {
+      "noise_multiplier": 4.0,
+      "n_clients": 10,
+      "n_rounds": 20,
+      "final_d_loss": 3.1032,
+      "final_g_loss": 0.9482,
+      "final_epsilon": 6.3396,
+      "kl_trip_length": 22.15805,
+      "kl_speed": 26.04987,
+      "mean_frechet": 2.12289,
+      "mi_accuracy": 0.5833,
+      "mi_advantage": 0.0833
+    },
+    {
+      "noise_multiplier": 8.0,
+      "n_clients": 10,
+      "n_rounds": 20,
+      "final_d_loss": 3.116,
+      "final_g_loss": 0.9493,
+      "final_epsilon": 2.9967,
+      "kl_trip_length": 22.1592,
+      "kl_speed": 26.05102,
+      "mean_frechet": 2.13076,
+      "mi_accuracy": 0.3333,
+      "mi_advantage": -0.1667
     }
   ]
 }

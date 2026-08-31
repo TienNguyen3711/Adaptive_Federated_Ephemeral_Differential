@@ -1,0 +1,83 @@
+{
+  "0.5": {
+    "n_trials": 8,
+    "trials": [
+      {
+        "final_d_loss": 0.6027,
+        "final_epsilon": 35.0464,
+        "mi_accuracy": 0.3333,
+        "mi_advantage": -0.1667,
+        "mi_auc": 0.4571,
+        "mi_auc_advantage": -0.0429
+      },
+      {
+        "final_d_loss": 0.4225,
+        "final_epsilon": 35.0464,
+        "mi_accuracy": 0.3333,
+        "mi_advantage": -0.1667,
+        "mi_auc": 0.4286,
+        "mi_auc_advantage": -0.0714
+      },
+      {
+        "final_d_loss": 0.4349,
+        "final_epsilon": 35.0464,
+        "mi_accuracy": 0.6667,
+        "mi_advantage": 0.1667,
+        "mi_auc": 0.6667,
+        "mi_auc_advantage": 0.1667
+      },
+      {
+        "final_d_loss": 0.4582,
+        "final_epsilon": 35.0464,
+        "mi_accuracy": 0.6667,
+        "mi_advantage": 0.1667,
+        "mi_auc": 0.6571,
+        "mi_auc_advantage": 0.1571
+      },
+      {
+        "final_d_loss": 0.5506,
+        "final_epsilon": 35.0464,
+        "mi_accuracy": 0.5,
+        "mi_advantage": 0.0,
+        "mi_auc": 0.2778,
+        "mi_auc_advantage": -0.2222
+      },
+      {
+        "final_d_loss": 0.4305,
+        "final_epsilon": 35.0464,
+        "mi_accuracy": 0.5,
+        "mi_advantage": 0.0,
+        "mi_auc": 0.6389,
+        "mi_auc_advantage": 0.1389
+      },
+      {
+        "final_d_loss": 0.3297,
+        "final_epsilon": 35.0464,
+        "mi_accuracy": 0.6667,
+        "mi_advantage": 0.1667,
+        "mi_auc": 0.7778,
+        "mi_auc_advantage": 0.2778
+      },
+      {
+        "final_d_loss": 0.6166,
+        "final_epsilon": 35.0464,
+        "mi_accuracy": 0.3333,
+        "mi_advantage": -0.1667,
+        "mi_auc": 0.7188,
+        "mi_auc_advantage": 0.2188
+      }
+    ],
+    "mi_advantage_mean": 0.0,
+    "mi_advantage_std": 0.1543,
+    "mi_advantage_ci95": 0.129,
+    "mi_auc_advantage_mean": 0.0779,
+    "mi_auc_advantage_std": 0.171,
+    "mi_auc_advantage_ci95": 0.143,
+    "d_loss_mean": 0.4807,
+    "d_loss_std": 0.0997,
+    "d_loss_ci95": 0.0833,
+    "epsilon_mean": 35.0464,
+    "epsilon_std": 0.0,
+    "epsilon_ci95": 0.0
+  }
+}

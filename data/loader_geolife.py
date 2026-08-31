@@ -50,13 +50,22 @@ def _segment_by_gap(
     points: List[Tuple[float, float, datetime]],
     gap_seconds: int = 1800,
     min_points: int = 10,
-) -> List[List[Tuple[float, float]]]:
+    keep_timestamps: bool = False,
+) -> List[List[Tuple]]:
     """
     Split a trajectory at time gaps > gap_seconds.
-    Returns list of (lat, lon) segments each with ≥ min_points points.
+    Returns list of (lat, lon) segments each with >= min_points points, or
+    (lat, lon, rel_seconds) triples if keep_timestamps=True, where
+    rel_seconds is seconds elapsed since that segment's first point.
     """
     if not points:
         return []
+
+    def _emit(pts):
+        if not keep_timestamps:
+            return [(p[0], p[1]) for p in pts]
+        t0 = pts[0][2]
+        return [(p[0], p[1], (p[2] - t0).total_seconds()) for p in pts]
 
     segments = []
     current = [points[0]]
@@ -64,12 +73,12 @@ def _segment_by_gap(
         dt = (points[i][2] - points[i-1][2]).total_seconds()
         if dt > gap_seconds:
             if len(current) >= min_points:
-                segments.append([(p[0], p[1]) for p in current])
+                segments.append(_emit(current))
             current = [points[i]]
         else:
             current.append(points[i])
     if len(current) >= min_points:
-        segments.append([(p[0], p[1]) for p in current])
+        segments.append(_emit(current))
     return segments
 
 
@@ -90,16 +99,18 @@ def iter_user_trajectories(
     user_ids: Optional[List[str]] = None,
     min_points: int = 10,
     gap_seconds: int = 1800,
+    keep_timestamps: bool = False,
 ) -> Iterator[Tuple[str, List[List[Tuple[float, float]]]]]:
     """
     Yield (user_id, [trajectory_segments]) for each user.
 
     Parameters
     ----------
-    data_root   : path to GeoLife Data/ directory
-    user_ids    : subset of user IDs (e.g. ['000','001']); None = all 182
-    min_points  : minimum points per segment (shorter segments dropped)
-    gap_seconds : time gap threshold for splitting trajectories
+    data_root       : path to GeoLife Data/ directory
+    user_ids        : subset of user IDs (e.g. ['000','001']); None = all 182
+    min_points      : minimum points per segment (shorter segments dropped)
+    gap_seconds     : time gap threshold for splitting trajectories
+    keep_timestamps : if True, segments are (lat, lon, rel_seconds) triples
     """
     root = data_root or _DATA_ROOT
     all_users = sorted(os.listdir(root)) if user_ids is None else user_ids
@@ -113,7 +124,8 @@ def iter_user_trajectories(
         for plt in plt_files:
             pts  = _parse_plt(plt)
             segs = _segment_by_gap(pts, gap_seconds=gap_seconds,
-                                   min_points=min_points)
+                                   min_points=min_points,
+                                   keep_timestamps=keep_timestamps)
             user_segs.extend(segs)
         if user_segs:
             yield uid, user_segs
@@ -187,6 +199,96 @@ def load_flat(
     ):
         all_segs.extend(segs)
     return all_segs
+
+
+def load_flat_with_timestamps(
+    data_root: str = None,
+    n_users: int = 50,
+    min_points: int = 20,
+    gap_seconds: int = 1800,
+    seed: int = 42,
+) -> List[List[Tuple[float, float, float]]]:
+    """
+    Same as load_flat(), but each segment's points are (lat, lon, rel_seconds)
+    triples, where rel_seconds is real elapsed time since the segment's first
+    GPS fix (as recorded in the .plt files) — for Temporal Obfuscation.
+    """
+    import random
+    rng = random.Random(seed)
+
+    root = data_root or _DATA_ROOT
+    all_users = sorted(os.listdir(root))
+    selected  = rng.sample(all_users, min(n_users, len(all_users)))
+
+    all_segs = []
+    for _, segs in iter_user_trajectories(
+        data_root=root, user_ids=selected,
+        min_points=min_points, gap_seconds=gap_seconds,
+        keep_timestamps=True,
+    ):
+        all_segs.extend(segs)
+    return all_segs
+
+
+def load_flat_with_profile_split(
+    data_root: str = None,
+    n_users: int = 50,
+    min_points: int = 20,
+    gap_seconds: int = 1800,
+    seed: int = 42,
+    max_eval_per_user: int = 10,
+):
+    """
+    Per-user profile/eval split for the historical-profile SA-DP scorer
+    (adaptive_dp.build_profile / score_trajectory(profile=...)).
+
+    For each user with >=2 real GPS segments, the earlier half of their
+    segments (by file order) build a frozen sensitivity profile and the
+    later half are returned as eval trajectories to be scored AGAINST that
+    profile -- never against themselves. Users with only one segment are
+    skipped (no prior history to build a profile from).
+
+    Returns (eval_segs, eval_ts, eval_profiles): eval_profiles[i] is the
+    profile for eval_segs[i]/eval_ts[i], built entirely from segments other
+    than eval_segs[i]. The triples are shuffled (seeded) and each user
+    contributes at most max_eval_per_user entries, so that a caller taking
+    only the first N is a representative cross-user sample rather than
+    being dominated by whichever few users happen to have the most
+    segments (real GeoLife users vary enormously in segment count, and
+    iter_user_trajectories yields users in a fixed file-listing order).
+    """
+    import random
+    from Adaptive_Federated_Ephemeral_Differential.adaptive_dp import build_profile
+
+    rng = random.Random(seed)
+    root = data_root or _DATA_ROOT
+    all_users = sorted(os.listdir(root))
+    selected  = rng.sample(all_users, min(n_users, len(all_users)))
+
+    eval_segs, eval_ts, eval_profiles = [], [], []
+    for _, segs in iter_user_trajectories(
+        data_root=root, user_ids=selected,
+        min_points=min_points, gap_seconds=gap_seconds,
+        keep_timestamps=True,
+    ):
+        if len(segs) < 2:
+            continue
+        n_profile = max(1, len(segs) // 2)
+        profile_segs, rest_segs = segs[:n_profile], segs[n_profile:]
+        profile_trajs = [[(p[0], p[1]) for p in s] for s in profile_segs]
+        profile_ts    = [[p[2] for p in s] for s in profile_segs]
+        profile = build_profile(profile_trajs, profile_ts)
+        for s in rest_segs[:max_eval_per_user]:
+            eval_segs.append([(p[0], p[1]) for p in s])
+            eval_ts.append([p[2] for p in s])
+            eval_profiles.append(profile)
+
+    order = list(range(len(eval_segs)))
+    rng.shuffle(order)
+    eval_segs     = [eval_segs[i] for i in order]
+    eval_ts       = [eval_ts[i] for i in order]
+    eval_profiles = [eval_profiles[i] for i in order]
+    return eval_segs, eval_ts, eval_profiles
 
 
 if __name__ == "__main__":

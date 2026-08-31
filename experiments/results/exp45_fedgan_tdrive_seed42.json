@@ -51,6 +51,34 @@
       "mean_frechet": 2.13997,
       "mi_accuracy": 0.5,
       "mi_advantage": 0.0
+    },
+    {
+      "noise_multiplier": 4.0,
+      "n_clients": 10,
+      "n_rounds": 20,
+      "final_d_loss": 0.6645,
+      "final_g_loss": 0.9551,
+      "final_epsilon": 7.086,
+      "kl_trip_length": 22.15456,
+      "kl_speed": 26.04638,
+      "mean_frechet": 2.10087,
+      "mi_accuracy": 0.5,
+      "mi_advantage": 0.0
+    },
+    {
+      "noise_multiplier": 8.0,
+      "n_clients": 10,
+      "n_rounds": 20,
+      "final_d_loss": 0.6676,
+      "final_g_loss": 0.9504,
+      "final_epsilon": 3.3278,
+      "kl_trip_length": 22.15216,
+      "kl_speed": 26.04398,
+      "mean_frechet": 2.14339,
+      "mi_accuracy": 0.5,
+      "mi_advantage": 0.0
     }
-  ]
+  ],
+  "seed": 42,
+  "dataset": "tdrive"
 }

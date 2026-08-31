@@ -6,29 +6,29 @@
       "secret_size_bytes": 32,
       "repetitions": 50,
       "split": {
-        "mean_ms": 0.003,
+        "mean_ms": 0.004,
         "min_ms": 0.003,
-        "max_ms": 0.011
+        "max_ms": 0.012
       },
       "reconstruct": {
         "mean_ms": 0.092,
         "min_ms": 0.089,
-        "max_ms": 0.119
+        "max_ms": 0.114
       },
       "serialise": {
         "mean_ms": 0.001,
         "min_ms": 0.0,
-        "max_ms": 0.004
+        "max_ms": 0.005
       },
       "deserialise": {
         "mean_ms": 0.001,
-        "min_ms": 0.0,
-        "max_ms": 0.009
+        "min_ms": 0.001,
+        "max_ms": 0.002
       },
       "pbkdf2_baseline": {
-        "mean_ms": 120.3,
-        "min_ms": 119.252,
-        "max_ms": 122.767
+        "mean_ms": 131.54,
+        "min_ms": 123.533,
+        "max_ms": 148.79
       }
     },
     {
@@ -37,14 +37,14 @@
       "secret_size_bytes": 32,
       "repetitions": 50,
       "split": {
-        "mean_ms": 0.006,
+        "mean_ms": 0.007,
         "min_ms": 0.006,
-        "max_ms": 0.018
+        "max_ms": 0.017
       },
       "reconstruct": {
-        "mean_ms": 0.313,
-        "min_ms": 0.288,
-        "max_ms": 0.351
+        "mean_ms": 0.317,
+        "min_ms": 0.298,
+        "max_ms": 0.363
       },
       "serialise": {
         "mean_ms": 0.001,
@@ -57,9 +57,9 @@
         "max_ms": 0.002
       },
       "pbkdf2_baseline": {
-        "mean_ms": 120.41,
-        "min_ms": 119.268,
-        "max_ms": 122.413
+        "mean_ms": 128.439,
+        "min_ms": 123.197,
+        "max_ms": 142.771
       }
     },
     {
@@ -70,12 +70,12 @@
       "split": {
         "mean_ms": 0.014,
         "min_ms": 0.013,
-        "max_ms": 0.028
+        "max_ms": 0.024
       },
       "reconstruct": {
-        "mean_ms": 1.864,
-        "min_ms": 1.726,
-        "max_ms": 1.956
+        "mean_ms": 1.937,
+        "min_ms": 1.831,
+        "max_ms": 2.011
       },
       "serialise": {
         "mean_ms": 0.001,
@@ -85,12 +85,12 @@
       "deserialise": {
         "mean_ms": 0.001,
         "min_ms": 0.001,
-        "max_ms": 0.011
+        "max_ms": 0.003
       },
       "pbkdf2_baseline": {
-        "mean_ms": 120.687,
-        "min_ms": 119.432,
-        "max_ms": 122.922
+        "mean_ms": 129.432,
+        "min_ms": 124.764,
+        "max_ms": 138.802
       }
     },
     {
@@ -99,29 +99,29 @@
       "secret_size_bytes": 32,
       "repetitions": 50,
       "split": {
-        "mean_ms": 0.038,
-        "min_ms": 0.036,
-        "max_ms": 0.068
+        "mean_ms": 0.039,
+        "min_ms": 0.037,
+        "max_ms": 0.051
       },
       "reconstruct": {
-        "mean_ms": 4.693,
-        "min_ms": 4.492,
-        "max_ms": 4.906
+        "mean_ms": 4.751,
+        "min_ms": 4.651,
+        "max_ms": 4.905
       },
       "serialise": {
         "mean_ms": 0.002,
         "min_ms": 0.002,
-        "max_ms": 0.009
+        "max_ms": 0.014
       },
       "deserialise": {
         "mean_ms": 0.002,
         "min_ms": 0.002,
-        "max_ms": 0.004
+        "max_ms": 0.006
       },
       "pbkdf2_baseline": {
-        "mean_ms": 120.414,
-        "min_ms": 119.515,
-        "max_ms": 122.163
+        "mean_ms": 130.507,
+        "min_ms": 123.779,
+        "max_ms": 143.611
       }
     }
   ],
@@ -133,7 +133,7 @@
       "info_theoretic": false,
       "single_point_failure": true,
       "key_recovery_lt_t": true,
-      "total_latency_ms": 120.31,
+      "total_latency_ms": 128.63,
       "overhead_vs_single": 1.0,
       "comm_bytes_recon": 0
     },
@@ -144,7 +144,7 @@
       "info_theoretic": false,
       "single_point_failure": true,
       "key_recovery_lt_t": true,
-      "total_latency_ms": 120.31,
+      "total_latency_ms": 128.63,
       "overhead_vs_single": 1.0,
       "comm_bytes_recon": 0
     },
@@ -155,8 +155,8 @@
       "info_theoretic": true,
       "single_point_failure": false,
       "key_recovery_lt_t": false,
-      "total_latency_ms": 120.67,
-      "overhead_vs_single": 1.003,
+      "total_latency_ms": 131.63,
+      "overhead_vs_single": 1.0233,
       "comm_bytes_recon": 204
     },
     {
@@ -166,8 +166,8 @@
       "info_theoretic": true,
       "single_point_failure": false,
       "key_recovery_lt_t": false,
-      "total_latency_ms": 122.35,
-      "overhead_vs_single": 1.017,
+      "total_latency_ms": 133.53,
+      "overhead_vs_single": 1.0381,
       "comm_bytes_recon": 340
     }
   ]

@@ -1,20 +1,3 @@
-"""
-exp_dka.py — Experiment 3: Decentralised Key Agreement (DKA) Benchmark
-
-AFED-PPTE
-
-Experiment 3: DKA Latency and Overhead
-    - Measure split / reconstruct / serialise / deserialise latency
-    - Vary (t, n) configurations: (2,3), (3,5), (5,10), (10,20)
-    - Compare DKA overhead against PBKDF2 key derivation baseline
-    - Verify correctness: reconstructed secret == original for all configs
-    - Report: mean latency (ms), overhead ratio vs PBKDF2
-
-Run:
-    python -m paper2.experiments.exp_dka
-    python -m paper2.experiments.exp_dka --output results/exp3.json
-"""
-
 import argparse
 import json
 import os

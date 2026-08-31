@@ -47,9 +47,17 @@ def _segment_by_gap(
     points: List[Tuple[float, float, datetime]],
     gap_seconds: int = 1800,
     min_points: int = 10,
-) -> List[List[Tuple[float, float]]]:
+    keep_timestamps: bool = False,
+) -> List[List[Tuple]]:
     if not points:
         return []
+
+    def _emit(pts):
+        if not keep_timestamps:
+            return [(p[0], p[1]) for p in pts]
+        t0 = pts[0][2]
+        return [(p[0], p[1], (p[2] - t0).total_seconds()) for p in pts]
+
     # Sort by timestamp first (some files are not sorted)
     points = sorted(points, key=lambda p: p[2])
     segments, current = [], [points[0]]
@@ -57,12 +65,12 @@ def _segment_by_gap(
         dt = (points[i][2] - points[i-1][2]).total_seconds()
         if dt > gap_seconds or dt < 0:
             if len(current) >= min_points:
-                segments.append([(p[0], p[1]) for p in current])
+                segments.append(_emit(current))
             current = [points[i]]
         else:
             current.append(points[i])
     if len(current) >= min_points:
-        segments.append([(p[0], p[1]) for p in current])
+        segments.append(_emit(current))
     return segments
 
 
@@ -82,15 +90,17 @@ def iter_taxi_trajectories(
     taxi_ids: Optional[List[str]] = None,
     min_points: int = 10,
     gap_seconds: int = 1800,
+    keep_timestamps: bool = False,
 ) -> Iterator[Tuple[str, List[List[Tuple[float, float]]]]]:
     """
     Yield (taxi_id, [trajectory_segments]) for each taxi.
 
     Parameters
     ----------
-    taxi_ids    : list of taxi ID strings (e.g. ['1','2']); None = all
-    min_points  : minimum points per segment
-    gap_seconds : time gap threshold for splitting
+    taxi_ids        : list of taxi ID strings (e.g. ['1','2']); None = all
+    min_points      : minimum points per segment
+    gap_seconds     : time gap threshold for splitting
+    keep_timestamps : if True, segments are (lat, lon, rel_seconds) triples
     """
     root = data_root or _DATA_ROOT
     if taxi_ids is not None:
@@ -103,7 +113,8 @@ def iter_taxi_trajectories(
         tid  = os.path.splitext(os.path.basename(fpath))[0]
         pts  = _parse_taxi_file(fpath)
         segs = _segment_by_gap(pts, gap_seconds=gap_seconds,
-                               min_points=min_points)
+                               min_points=min_points,
+                               keep_timestamps=keep_timestamps)
         if segs:
             yield tid, segs
 
@@ -169,6 +180,85 @@ def load_flat(
     ):
         all_segs.extend(segs)
     return all_segs
+
+
+def load_flat_with_timestamps(
+    data_root: str = None,
+    n_taxis: int = 50,
+    min_points: int = 20,
+    gap_seconds: int = 1800,
+    seed: int = 42,
+) -> List[List[Tuple[float, float, float]]]:
+    """
+    Same as load_flat(), but each segment's points are (lat, lon, rel_seconds)
+    triples, where rel_seconds is real elapsed time since the segment's first
+    GPS fix — for Temporal Obfuscation.
+    """
+    import random
+    rng = random.Random(seed)
+
+    root = data_root or _DATA_ROOT
+    all_files = sorted(glob.glob(os.path.join(root, "*.txt")))
+    all_ids   = [os.path.splitext(os.path.basename(f))[0] for f in all_files]
+    selected  = rng.sample(all_ids, min(n_taxis, len(all_ids)))
+
+    all_segs = []
+    for _, segs in iter_taxi_trajectories(
+        data_root=root, taxi_ids=selected,
+        min_points=min_points, gap_seconds=gap_seconds,
+        keep_timestamps=True,
+    ):
+        all_segs.extend(segs)
+    return all_segs
+
+
+def load_flat_with_profile_split(
+    data_root: str = None,
+    n_taxis: int = 50,
+    min_points: int = 20,
+    gap_seconds: int = 1800,
+    seed: int = 42,
+    max_eval_per_user: int = 10,
+):
+    """
+    Per-taxi profile/eval split for the historical-profile SA-DP scorer
+    (adaptive_dp.build_profile / score_trajectory(profile=...)). See
+    loader_geolife.load_flat_with_profile_split() for the full contract
+    (incl. why the result is shuffled and capped per taxi).
+    """
+    import random
+    from Adaptive_Federated_Ephemeral_Differential.adaptive_dp import build_profile
+
+    rng = random.Random(seed)
+    root = data_root or _DATA_ROOT
+    all_files = sorted(glob.glob(os.path.join(root, "*.txt")))
+    all_ids   = [os.path.splitext(os.path.basename(f))[0] for f in all_files]
+    selected  = rng.sample(all_ids, min(n_taxis, len(all_ids)))
+
+    eval_segs, eval_ts, eval_profiles = [], [], []
+    for _, segs in iter_taxi_trajectories(
+        data_root=root, taxi_ids=selected,
+        min_points=min_points, gap_seconds=gap_seconds,
+        keep_timestamps=True,
+    ):
+        if len(segs) < 2:
+            continue
+        n_profile = max(1, len(segs) // 2)
+        profile_segs, rest_segs = segs[:n_profile], segs[n_profile:]
+        profile_trajs = [[(p[0], p[1]) for p in s] for s in profile_segs]
+        profile_ts    = [[p[2] for p in s] for s in profile_segs]
+        profile = build_profile(profile_trajs, profile_ts)
+        for s in rest_segs[:max_eval_per_user]:
+            eval_segs.append([(p[0], p[1]) for p in s])
+            eval_ts.append([p[2] for p in s])
+            eval_profiles.append(profile)
+
+    order = list(range(len(eval_segs)))
+    rng.shuffle(order)
+    eval_segs     = [eval_segs[i] for i in order]
+    eval_ts       = [eval_ts[i] for i in order]
+    eval_profiles = [eval_profiles[i] for i in order]
+    return eval_segs, eval_ts, eval_profiles
 
 
 if __name__ == "__main__":

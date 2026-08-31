@@ -1,22 +1,3 @@
-"""
-exp_e2e.py — Experiment 6: End-to-End AFED-PPTE Pipeline Evaluation
-
-AFED-PPTE
-
-Experiment 6: Full pipeline latency, budget savings, and comparison
-    - Run complete AFED-PPTE pipeline: SA-DP + DKA + encrypt
-    - Vary trajectory length L ∈ {10, 50, 100, 500, 1000}
-    - Vary ε_base ∈ {0.5, 1.0, 2.0}
-    - Vary DKA config: (t=3,n=5) and (t=5,n=10)
-    - Per-stage timing breakdown: sadp_score / sadp_noise / dka_derive / encrypt
-    - Compare total latency against uniform-DP baseline
-    - Report: mean budget savings (%) across all trajectory lengths
-
-Run:
-    python -m paper2.experiments.exp_e2e
-    python -m paper2.experiments.exp_e2e --output results/exp6.json --reps 20
-"""
-
 import argparse
 import json
 import os
@@ -46,7 +27,7 @@ from paper2.afed_pipeline import (
 # ─────────────────────────────────────────────────────────────────────────────
 
 def _uniform_dp_baseline_timing(n_points: int, epsilon: float, repetitions: int,
-                                 sensitivity_m: float = 500.0) -> Dict:
+                                 sensitivity_m: float = 500.0, seed: int = 0) -> Dict:
     """
     Simulate uniform-DP baseline: uniform Laplace (Layer 4) + single-key PBKDF2
     derivation (Layer 6) + AES-256-GCM encryption.
@@ -59,12 +40,12 @@ def _uniform_dp_baseline_timing(n_points: int, epsilon: float, repetitions: int,
     import struct
 
     dp_times, kd_times, enc_times = [], [], []
+    rng = np.random.default_rng(seed)
 
     for _ in range(repetitions):
         # Uniform Laplace (same scale for every point)
         t0 = time.perf_counter()
         scale = sensitivity_m / (epsilon * 111_000)
-        rng = np.random.default_rng()
         _ = rng.laplace(0, scale, (n_points, 2))
         dp_times.append((time.perf_counter() - t0) * 1000)
 
@@ -134,7 +115,7 @@ def run_experiment6(
     uniform_baseline = []
     for n_pts in trajectory_lengths:
         for eps in epsilon_values:
-            b = _uniform_dp_baseline_timing(n_pts, eps, min(repetitions, 10))
+            b = _uniform_dp_baseline_timing(n_pts, eps, min(repetitions, 10), seed=seed)
             b["n_points"] = n_pts
             b["epsilon_base"] = eps
             uniform_baseline.append(b)

@@ -5,36 +5,36 @@
       "dka_t": 3,
       "dka_n": 5,
       "n_trajectories": 20,
-      "sadp_score_ms": 26.642,
-      "sadp_noise_ms": 0.323,
-      "dka_derive_ms": 119.955,
-      "encrypt_ms": 0.11,
-      "total_ms": 147.03,
-      "mean_budget_savings_pct": 33.68
+      "sadp_score_ms": 30.966,
+      "sadp_noise_ms": 0.733,
+      "dka_derive_ms": 131.62,
+      "encrypt_ms": 0.145,
+      "total_ms": 163.464,
+      "mean_budget_savings_pct": 34.22
     },
     {
       "epsilon_base": 1.0,
       "dka_t": 3,
       "dka_n": 5,
       "n_trajectories": 20,
-      "sadp_score_ms": 26.644,
-      "sadp_noise_ms": 0.337,
-      "dka_derive_ms": 119.949,
-      "encrypt_ms": 0.113,
-      "total_ms": 147.043,
-      "mean_budget_savings_pct": 33.68
+      "sadp_score_ms": 27.52,
+      "sadp_noise_ms": 0.759,
+      "dka_derive_ms": 131.388,
+      "encrypt_ms": 0.14,
+      "total_ms": 159.807,
+      "mean_budget_savings_pct": 34.22
     },
     {
       "epsilon_base": 2.0,
       "dka_t": 3,
       "dka_n": 5,
       "n_trajectories": 20,
-      "sadp_score_ms": 26.581,
-      "sadp_noise_ms": 0.317,
-      "dka_derive_ms": 119.065,
-      "encrypt_ms": 0.101,
-      "total_ms": 146.064,
-      "mean_budget_savings_pct": 33.68
+      "sadp_score_ms": 27.826,
+      "sadp_noise_ms": 0.755,
+      "dka_derive_ms": 134.099,
+      "encrypt_ms": 0.143,
+      "total_ms": 162.823,
+      "mean_budget_savings_pct": 34.22
     }
   ]
 }

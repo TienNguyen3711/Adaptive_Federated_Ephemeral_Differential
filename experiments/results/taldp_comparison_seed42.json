@@ -1,0 +1,61 @@
+{
+  "epsilon_base": 1.0,
+  "seed": 42,
+  "results": {
+    "sa_dp": {
+      "made_high_m": 3149.3,
+      "made_low_m": 603.6,
+      "targeting_ratio": 5.22,
+      "made_high_own_m": 3149.3,
+      "made_low_own_m": 603.6,
+      "targeting_ratio_own": 5.22,
+      "savings_pct": 64.41,
+      "rq_mae_pct": 1.31,
+      "n_trajs": 500
+    },
+    "uniform": {
+      "made_high_m": 773.9,
+      "made_low_m": 543.8,
+      "targeting_ratio": 1.42,
+      "made_high_own_m": 0.0,
+      "made_low_own_m": 768.6,
+      "targeting_ratio_own": null,
+      "savings_pct": 0.0,
+      "rq_mae_pct": 1.35,
+      "n_trajs": 500
+    },
+    "planar": {
+      "made_high_m": 885.1,
+      "made_low_m": 671.7,
+      "targeting_ratio": 1.32,
+      "made_high_own_m": 0.0,
+      "made_low_own_m": 879.7,
+      "targeting_ratio_own": null,
+      "savings_pct": 0.0,
+      "rq_mae_pct": 1.33,
+      "n_trajs": 500
+    },
+    "da_dp": {
+      "made_high_m": 3431.0,
+      "made_low_m": 1992.6,
+      "targeting_ratio": 1.72,
+      "made_high_own_m": 3435.4,
+      "made_low_own_m": 189.1,
+      "targeting_ratio_own": 18.17,
+      "savings_pct": 74.31,
+      "rq_mae_pct": 1.3,
+      "n_trajs": 500
+    },
+    "ss_dp": {
+      "made_high_m": 3815.3,
+      "made_low_m": 2423.6,
+      "targeting_ratio": 1.57,
+      "made_high_own_m": 3740.8,
+      "made_low_own_m": 129.7,
+      "targeting_ratio_own": 28.84,
+      "savings_pct": 78.25,
+      "rq_mae_pct": 1.31,
+      "n_trajs": 500
+    }
+  }
+}

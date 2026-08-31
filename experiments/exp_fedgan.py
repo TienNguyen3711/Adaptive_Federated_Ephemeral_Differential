@@ -1,27 +1,3 @@
-"""
-exp_fedgan.py — Experiments 4 & 5: Federated GAN Evaluation
-
-AFED-PPTE
-
-Experiment 4: Fed-GAN Convergence and DP Budget
-    - Train Fed-GAN across noise multipliers σ ∈ {0.5, 1.0, 1.5, 2.0}
-    - Vary client counts K ∈ {3, 5, 10} and rounds R ∈ {10, 20, 50}
-    - Track D-loss / G-loss convergence, KL divergence, Fréchet distance
-    - Report cumulative ε (Rényi DP moments accountant)
-
-Experiment 5: Membership Inference Resistance — Three-way Comparison
-    - Fed-GAN (DP-SGD, this work) vs:
-        Centralised GAN (no federation, no DP) — MI accuracy ≈ 0.75+
-        FedAvg-noDP (federation without DP gradients) — MI accuracy middle
-        LDP (local DP, high noise σ=10) — MI low but utility degraded
-    - Shows: Fed-GAN achieves privacy-utility Pareto optimum
-    - Metrics: MI accuracy, MI advantage, Fréchet distance, KL divergence
-
-Run:
-    python -m paper2.experiments.exp_fedgan
-    python -m paper2.experiments.exp_fedgan --output results/exp45.json
-"""
-
 import argparse
 import json
 import os

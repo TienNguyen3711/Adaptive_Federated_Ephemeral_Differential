@@ -1,0 +1,90 @@
+{
+  "seed": 42,
+  "nearby_radius_m": 300.0,
+  "results": {
+    "geolife": {
+      "dataset": "geolife",
+      "osm_city": "beijing",
+      "n_real_pois_in_city": 4488,
+      "n_trajectories": 1000,
+      "n_trajectories_with_nearby_poi": 769,
+      "pct_trajectories_with_nearby_poi": 76.9,
+      "n_poi_total_matched": 244390,
+      "mean_poi_per_trajectory": 244.39,
+      "poi_category_counts": {
+        "education": 10719,
+        "medical": 12089,
+        "transit": 59111,
+        "commercial": 157108,
+        "political": 3880,
+        "religious": 1216,
+        "legal": 267
+      },
+      "epsilon_base": 1.0,
+      "mean_budget_savings_pct": 7.241,
+      "theorem1_holds": true,
+      "made_high_m": 2364.707,
+      "made_low_m": 721.674,
+      "targeting_ratio": 3.277,
+      "n_high_sensitivity_points": 305,
+      "n_low_sensitivity_points": 997,
+      "elapsed_s": 267.8
+    },
+    "tdrive": {
+      "dataset": "tdrive",
+      "osm_city": "beijing",
+      "n_real_pois_in_city": 4488,
+      "n_trajectories": 500,
+      "n_trajectories_with_nearby_poi": 432,
+      "pct_trajectories_with_nearby_poi": 86.4,
+      "n_poi_total_matched": 755145,
+      "mean_poi_per_trajectory": 1510.29,
+      "poi_category_counts": {
+        "political": 19641,
+        "medical": 39693,
+        "transit": 214761,
+        "education": 23324,
+        "religious": 5249,
+        "legal": 868,
+        "commercial": 451609
+      },
+      "epsilon_base": 1.0,
+      "mean_budget_savings_pct": 5.978,
+      "theorem1_holds": true,
+      "made_high_m": 2368.201,
+      "made_low_m": 714.824,
+      "targeting_ratio": 3.313,
+      "n_high_sensitivity_points": 217,
+      "n_low_sensitivity_points": 498,
+      "elapsed_s": 129.7
+    },
+    "porto": {
+      "dataset": "porto",
+      "osm_city": "porto",
+      "n_real_pois_in_city": 4764,
+      "n_trajectories": 2000,
+      "n_trajectories_with_nearby_poi": 2000,
+      "pct_trajectories_with_nearby_poi": 100.0,
+      "n_poi_total_matched": 1433579,
+      "mean_poi_per_trajectory": 716.79,
+      "poi_category_counts": {
+        "medical": 109048,
+        "commercial": 1166219,
+        "political": 48294,
+        "transit": 59064,
+        "education": 35514,
+        "religious": 9375,
+        "legal": 6065
+      },
+      "epsilon_base": 1.0,
+      "mean_budget_savings_pct": 34.885,
+      "theorem1_holds": true,
+      "made_high_m": 2458.772,
+      "made_low_m": 717.974,
+      "targeting_ratio": 3.425,
+      "n_high_sensitivity_points": 1858,
+      "n_low_sensitivity_points": 1858,
+      "elapsed_s": 56.9
+    }
+  }
+}

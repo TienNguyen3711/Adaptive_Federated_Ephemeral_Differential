@@ -1,0 +1,131 @@
+{
+  "seed": 42,
+  "n_users_per_dataset": 30,
+  "time_thresh_s": 300.0,
+  "dist_thresh_m": 200.0,
+  "results": {
+    "geolife": {
+      "dataset": "geolife",
+      "n_trajectories": 3842,
+      "n_with_stay_points": 2503,
+      "home_work_dwell_s": {
+        "n": 3736,
+        "mean_s": 2146.3,
+        "median_s": 889.0,
+        "p10_s": 334.0,
+        "p90_s": 4790.0,
+        "min_s": 300.0,
+        "max_s": 200805.0
+      },
+      "home_only_dwell_s": {
+        "n": 2503,
+        "mean_s": 2572.8,
+        "median_s": 1060.0,
+        "p10_s": 348.2,
+        "p90_s": 5944.0,
+        "min_s": 300.0,
+        "max_s": 200805.0
+      },
+      "work_only_dwell_s": {
+        "n": 1233,
+        "mean_s": 1280.6,
+        "median_s": 665.0,
+        "p10_s": 318.2,
+        "p90_s": 2799.6,
+        "min_s": 300.0,
+        "max_s": 29831.0
+      },
+      "other_stay_dwell_s": {
+        "n": 1704,
+        "mean_s": 803.2,
+        "median_s": 490.0,
+        "p10_s": 309.0,
+        "p90_s": 1604.4,
+        "min_s": 300.0,
+        "max_s": 15354.0
+      }
+    },
+    "tdrive": {
+      "dataset": "tdrive",
+      "n_trajectories": 239,
+      "n_with_stay_points": 206,
+      "home_work_dwell_s": {
+        "n": 347,
+        "mean_s": 10886.7,
+        "median_s": 1090.0,
+        "p10_s": 313.2,
+        "p90_s": 17406.8,
+        "min_s": 300.0,
+        "max_s": 332543.0
+      },
+      "home_only_dwell_s": {
+        "n": 206,
+        "mean_s": 15340.0,
+        "median_s": 1450.5,
+        "p10_s": 380.0,
+        "p90_s": 22800.0,
+        "min_s": 300.0,
+        "max_s": 332543.0
+      },
+      "work_only_dwell_s": {
+        "n": 141,
+        "mean_s": 4380.6,
+        "median_s": 738.0,
+        "p10_s": 302.0,
+        "p90_s": 8399.0,
+        "min_s": 300.0,
+        "max_s": 77394.0
+      },
+      "other_stay_dwell_s": {
+        "n": 585,
+        "mean_s": 1846.6,
+        "median_s": 427.0,
+        "p10_s": 300.0,
+        "p90_s": 2369.0,
+        "min_s": 300.0,
+        "max_s": 114295.0
+      }
+    },
+    "porto": {
+      "dataset": "porto",
+      "n_trajectories": 1500,
+      "n_with_stay_points": 131,
+      "home_work_dwell_s": {
+        "n": 146,
+        "mean_s": 691.7,
+        "median_s": 435.0,
+        "p10_s": 315.0,
+        "p90_s": 1320.0,
+        "min_s": 300.0,
+        "max_s": 4530.0
+      },
+      "home_only_dwell_s": {
+        "n": 131,
+        "mean_s": 698.0,
+        "median_s": 435.0,
+        "p10_s": 315.0,
+        "p90_s": 1290.0,
+        "min_s": 300.0,
+        "max_s": 4530.0
+      },
+      "work_only_dwell_s": {
+        "n": 15,
+        "mean_s": 637.0,
+        "median_s": 435.0,
+        "p10_s": 300.0,
+        "p90_s": 1272.0,
+        "min_s": 300.0,
+        "max_s": 1950.0
+      },
+      "other_stay_dwell_s": {
+        "n": 6,
+        "mean_s": 590.0,
+        "median_s": 450.0,
+        "p10_s": 382.5,
+        "p90_s": 937.5,
+        "min_s": 360.0,
+        "max_s": 1050.0
+      }
+    }
+  }
+}
