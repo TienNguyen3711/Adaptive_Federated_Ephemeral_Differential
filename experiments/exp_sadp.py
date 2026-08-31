@@ -1,26 +1,3 @@
-"""
-exp_sadp.py — Experiments 1 & 2: Semantic-Adaptive DP Evaluation
-
-AFED-PPTE
-
-Experiment 1: SA-DP Budget Composition (Theorem 1 verification)
-    - Compare ε_adaptive vs ε_uniform across trajectories
-    - Vary ε_base ∈ {0.1, 0.5, 1.0, 2.0, 5.0}
-    - Vary sensitivity distributions (all low / mixed / all high)
-    - Verify Theorem 1: ε_adaptive ≤ n × ε_base  always
-    - Report: mean budget savings (%), per-sensitivity-level breakdown
-
-Experiment 2: Semantic Privacy vs Utility Trade-off
-    - Three-way comparison: SA-DP vs Uniform Laplace vs Planar Laplace
-    - Metrics: MADE (m), trip distance error (%), range query MAE (%)
-    - Privacy-utility Pareto table: ε vs MADE showing SA-DP dominates
-    - Report: SA-DP Pareto-dominates both baselines across all ε values
-
-Run:
-    python -m paper2.experiments.exp_sadp
-    python -m paper2.experiments.exp_sadp --dataset geolife --output results/exp1.json
-"""
-
 import argparse
 import json
 import math
@@ -297,8 +274,8 @@ def run_experiment2(
             pois   = _scenario_pois("mixed", traj)
             scores = score_trajectory(traj, poi_records=pois)
 
-            noised_sadp = apply_adaptive_laplace(traj, scores, eps, sensitivity_m)
-            noised_uni  = apply_adaptive_laplace(traj, [1.0]*len(traj), eps, sensitivity_m)
+            noised_sadp = apply_adaptive_laplace(traj, scores, eps, sensitivity_m, rng=rng)
+            noised_uni  = apply_adaptive_laplace(traj, [1.0]*len(traj), eps, sensitivity_m, rng=rng)
             noised_pl   = apply_planar_laplace(traj, eps, sensitivity_m, rng=rng)
 
             high_idx = [i for i, s in enumerate(scores) if s >= 3.0]
@@ -405,8 +382,8 @@ def run_pareto_table(
             scores = score_trajectory(traj, poi_records=pois)
 
             analysis    = compute_budget_analysis(scores, eps, sensitivity_m)
-            noised_sadp = apply_adaptive_laplace(traj, scores, eps, sensitivity_m)
-            noised_uni  = apply_adaptive_laplace(traj, [1.0]*len(traj), eps, sensitivity_m)
+            noised_sadp = apply_adaptive_laplace(traj, scores, eps, sensitivity_m, rng=rng)
+            noised_uni  = apply_adaptive_laplace(traj, [1.0]*len(traj), eps, sensitivity_m, rng=rng)
             noised_pl   = apply_planar_laplace(traj, eps, sensitivity_m, rng=rng)
 
             sadp_eps_list.append(analysis["eps_adaptive"])

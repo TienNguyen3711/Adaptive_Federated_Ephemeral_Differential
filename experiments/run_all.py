@@ -1,21 +1,3 @@
-"""
-run_all.py — AFED-PPTE Full Experiment Suite
-
-Runs all 6 experiments with fixed seeds for reproducibility.
-Results saved to experiments/results/ as JSON files.
-
-Seeds
------
-    SEED_MAIN = 42   (primary seed — all stochastic elements)
-    SEED_ALT  = 123  (secondary seed — cross-validation / sensitivity check)
-
-Usage
------
-    python -m paper2.experiments.run_all              # full run
-    python -m paper2.experiments.run_all --quick      # reduced params for debug
-    python -m paper2.experiments.run_all --seed 123   # reproduce with alt seed
-"""
-
 import argparse
 import json
 import os
@@ -284,6 +266,12 @@ def main():
     p    = QUICK_PARAMS if args.quick else FULL_PARAMS
     seed = args.seed
     mode = "QUICK" if args.quick else "FULL"
+
+    # Global seed: covers numpy legacy API and any stdlib random calls
+    import random as _random
+    _random.seed(seed)
+    import numpy as _np
+    _np.random.seed(seed)
 
     print(f"\n{'─'*60}")
     print(f"  AFED-PPTE Experiment Suite")

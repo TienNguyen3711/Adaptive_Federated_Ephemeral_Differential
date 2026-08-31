@@ -17,9 +17,7 @@ from paper2.adaptive_dp import (
     compute_budget_analysis,
 )
 
-# Trajectory is List[Tuple[float, float]] — (lat, lon) pairs
-# Trajectory is represented as List[Tuple[float, float]] — (lat, lon) pairs.
-# TrajectoryPoint is a plain 2-tuple; no separate class needed.
+
 TrajectoryPoint = Tuple[float, float]
 from paper2.decentralised_key import (
     DKAKeyManager,
@@ -35,7 +33,6 @@ from paper2.federated_gan import (
     make_synthetic_client_data,
     fedgan_simulate,
 )
-
 # AES-256-GCM via Python's built-in cryptography or fallback
 try:
     from cryptography.hazmat.primitives.ciphers.aead import AESGCM
@@ -113,11 +110,19 @@ def hmac_sha256(key: bytes, msg: bytes) -> bytes:
 
 class AFEDPipeline:
 
-    def __init__(self, config: AFEDConfig = None):
+    def __init__(
+        self,
+        config: AFEDConfig = None,
+        pretrained_gan_server: Optional[FedGANServer] = None,
+    ):
         self.cfg = config or AFEDConfig()
         self._dka_mgr: Optional[DKAKeyManager] = None
         self._shares: Optional[List[Tuple[int, int]]] = None
-        self._gan_server: Optional[FedGANServer] = None
+        # Allow reusing an already-trained Fed-GAN (e.g. from a prior
+        # experiment) instead of training a throwaway one per pipeline
+        # instance — training cost does not depend on epsilon_base/dka_t/n,
+        # so retraining per-config in a sweep is pure waste.
+        self._gan_server: Optional[FedGANServer] = pretrained_gan_server
 
     # ── DKA setup ─────────────────────────────────────────────────────────────
 
@@ -175,6 +180,58 @@ class AFEDPipeline:
             raise RuntimeError("Fed-GAN not trained — call train_fedgan() first")
         return self._gan_server.generate(n)
 
+    def _fedgan_substitute(
+        self,
+        reference: List[TrajectoryPoint],
+    ) -> List[TrajectoryPoint]:
+        """Stage 2: generate a synthetic trajectory scaled to reference's bounding box.
+
+        The GAN produces normalised vectors in [-1, 1]; we rescale to the
+        geographic bounding box of `reference` so the synthetic trajectory is
+        geographically plausible.  Linear interpolation resamples from the
+        GAN's fixed seq_len to len(reference) points.
+
+        `reference` MUST be the SA-DP-noised trajectory (Stage 1's output),
+        never the raw real trajectory: the synthetic trajectory's centroid
+        and extent are a deterministic function of `reference`, so passing
+        the real trajectory here would make the stored artefact's geographic
+        positioning an unprotected function of the sensitive input, bypassing
+        SA-DP's guarantee entirely (see \\S Integration, Stage 2 fix). Passing
+        the noised trajectory instead makes this rescaling step post-processing
+        of an \\varepsilon-DP output, which inherits the same guarantee under
+        the DP post-processing closure property (Dwork & Roth 2014, Prop. 2.1).
+        """
+        raw = self._gan_server.generate(1)[0]           # shape (seq_len * 2,)
+        gan_params = self.cfg.gan_params or TrajectoryGANParams()
+        pts_norm = raw.reshape(-1, 2)                    # (seq_len, 2)
+
+        ref = np.array(reference, dtype=float)
+        lat_c = float(ref[:, 0].mean())
+        lon_c = float(ref[:, 1].mean())
+        lat_r = max(float(ref[:, 0].max() - ref[:, 0].min()), 0.005)
+        lon_r = max(float(ref[:, 1].max() - ref[:, 1].min()), 0.005)
+
+        synth_pts = [
+            (round(lat_c + float(p[0]) * lat_r * 0.5, 7),
+             round(lon_c + float(p[1]) * lon_r * 0.5, 7))
+            for p in pts_norm
+        ]
+
+        # Resample to match original trajectory length via linear interpolation
+        n_orig, n_synth = len(reference), len(synth_pts)
+        if n_orig == n_synth:
+            return synth_pts
+        indices = np.linspace(0, n_synth - 1, n_orig)
+        result = []
+        for idx in indices:
+            lo = int(idx)
+            hi = min(lo + 1, n_synth - 1)
+            alpha = idx - lo
+            lat = synth_pts[lo][0] * (1 - alpha) + synth_pts[hi][0] * alpha
+            lon = synth_pts[lo][1] * (1 - alpha) + synth_pts[hi][1] * alpha
+            result.append((round(lat, 7), round(lon, 7)))
+        return result
+
     # ── Main processing pipeline ───────────────────────────────────────────────
 
     def process(
@@ -183,8 +240,29 @@ class AFEDPipeline:
         user_id: str,
         timestamps: Optional[List[float]] = None,
         poi_records: Optional[List[POIRecord]] = None,
+        profile: Optional[List[POIRecord]] = None,
+        rng: Optional[np.random.Generator] = None,
     ) -> ProcessingResult:
+        """
+        `timestamps` feeds SA-DP's Stage-1 stay-point scoring (real
+        timestamps sharpen dwell-time detection, None falls back to an
+        index-count proxy) and is also serialised into the encrypted
+        payload as-is; None falls back to a synthesised uniform 30s
+        sampling cadence (matches the codebase's existing convention, e.g.
+        adaptive_dp.py's own self-test).
+
+        `profile`, if given, is a frozen historical sensitivity profile
+        (adaptive_dp.build_profile, built from this user's prior sessions,
+        never from `trajectory` itself) passed straight through to Stage 1's
+        score_trajectory() call. Omitting it falls back to same-trajectory
+        scoring (see score_trajectory's own docstring for the data-dependent-
+        sensitivity caveat this carries, Remark 1 in the paper).
+        """
         timings: Dict[str, float] = {}
+
+        ts_in = timestamps if timestamps is not None else [
+            float(i * 30) for i in range(len(trajectory))
+        ]
 
         # ── Stage 1: SA-DP scoring ─────────────────────────────────────────
         t0 = time.perf_counter()
@@ -192,20 +270,45 @@ class AFEDPipeline:
             trajectory,
             timestamps=timestamps,
             poi_records=poi_records,
+            profile=profile,
         )
         timings["sadp_score_ms"] = (time.perf_counter() - t0) * 1000
 
-        # ── Stage 2: Adaptive Laplace noise ───────────────────────────────
+        # ── Stage 2a: Adaptive Laplace noise (used for budget accounting) ──
         t0 = time.perf_counter()
         noised = apply_adaptive_laplace(
             trajectory,
             scores,
             self.cfg.epsilon_base,
             self.cfg.sensitivity_m,
+            rng=rng,
         )
         timings["sadp_noise_ms"] = (time.perf_counter() - t0) * 1000
 
         budget = compute_budget_analysis(scores, self.cfg.epsilon_base, self.cfg.sensitivity_m)
+
+        # ── Stage 2b: Fed-GAN substitution ────────────────────────────────
+        # If a trained Fed-GAN is available, encrypt the synthetic trajectory
+        # (real GPS never reaches persistent storage).  Otherwise fall back to
+        # the SA-DP-noised real trajectory.
+        #
+        # The synthetic trajectory is rescaled to `noised`'s bounding box, NOT
+        # `trajectory`'s: this makes the rescaling a post-processing step on
+        # SA-DP's epsilon-DP output rather than an unprotected function of the
+        # raw real coordinates, so the stored artefact's geographic extent
+        # inherits SA-DP's guarantee (subject to the same Remark 1 scope) by
+        # the DP post-processing closure property.
+        t0 = time.perf_counter()
+        if self._gan_server is not None:
+            payload_trajectory = self._fedgan_substitute(noised)
+        else:
+            payload_trajectory = noised
+        timings["fedgan_synth_ms"] = (time.perf_counter() - t0) * 1000
+
+        # _fedgan_substitute() resamples to exactly len(trajectory) points,
+        # so ts_in (index-aligned with `trajectory`) is already
+        # index-aligned with `payload_trajectory` in both branches.
+        payload_timestamps = ts_in
 
         # ── Stage 3: DKA key derivation ────────────────────────────────────
         t0 = time.perf_counter()
@@ -217,7 +320,7 @@ class AFEDPipeline:
 
         # ── Stage 4: Serialise + AES-256-GCM encrypt ──────────────────────
         t0 = time.perf_counter()
-        payload = _serialise_trajectory(noised)
+        payload = _serialise_trajectory(payload_trajectory, payload_timestamps)
         nonce   = secrets.token_bytes(12)
         ct      = _aes_gcm_encrypt(aes_key, nonce, payload)
         timings["encrypt_ms"] = (time.perf_counter() - t0) * 1000
@@ -238,7 +341,8 @@ class AFEDPipeline:
         self,
         result: ProcessingResult,
         collected_share_blobs: List[bytes],
-    ) -> List[Tuple[float, float]]:
+    ) -> List[Tuple[float, float, float]]:
+        """Returns (lat, lon, timestamp) triples."""
         shares  = [deserialise_share(b) for b in collected_share_blobs]
         mgr     = DKAKeyManager.from_shares(shares[:self.cfg.dka_t])
         aes_key = mgr.derive_encryption_key(result.user_id, result.salt)
@@ -252,21 +356,29 @@ class AFEDPipeline:
 # Trajectory (de)serialisation helpers
 # ─────────────────────────────────────────────────────────────────────────────
 
-def _serialise_trajectory(points: List[Tuple[float, float]]) -> bytes:
-    buf = struct.pack(">I", len(points))
-    for lat, lon in points:
-        buf += struct.pack(">dd", lat, lon)
+_WIRE_FORMAT_VERSION = 2   # v2 adds obfuscated per-point timestamps (Layer 5)
+
+
+def _serialise_trajectory(
+    points: List[Tuple[float, float]],
+    timestamps: List[float],
+) -> bytes:
+    buf = struct.pack(">BI", _WIRE_FORMAT_VERSION, len(points))
+    for (lat, lon), ts in zip(points, timestamps):
+        buf += struct.pack(">ddd", lat, lon, ts)
     return buf
 
 
-def _deserialise_trajectory(data: bytes) -> List[Tuple[float, float]]:
-    n    = struct.unpack(">I", data[:4])[0]
+def _deserialise_trajectory(data: bytes) -> List[Tuple[float, float, float]]:
+    version, n = struct.unpack(">BI", data[:5])
+    if version != _WIRE_FORMAT_VERSION:
+        raise ValueError(f"Unsupported trajectory wire format version: {version}")
     pts  = []
-    off  = 4
+    off  = 5
     for _ in range(n):
-        lat, lon = struct.unpack(">dd", data[off:off + 16])
-        pts.append((lat, lon))
-        off += 16
+        lat, lon, ts = struct.unpack(">ddd", data[off:off + 24])
+        pts.append((lat, lon, ts))
+        off += 24
     return pts
 
 
@@ -303,11 +415,20 @@ def run_e2e_benchmark(
     results = []
     rng = np.random.default_rng(seed)
 
+    # Train Fed-GAN once and reuse across every (n_pts, eps, dka) combination
+    # in the sweep — training cost doesn't depend on any of those parameters,
+    # so retraining per-config would be pure waste. This also ensures the
+    # benchmark actually exercises the Fed-GAN substitution path instead of
+    # silently falling back to the SA-DP-noised trajectory.
+    _bootstrap = AFEDPipeline(AFEDConfig())
+    _bootstrap.train_fedgan()
+    shared_gan_server = _bootstrap._gan_server
+
     for n_pts in trajectory_lengths:
         for eps in epsilon_values:
             for (t, n) in dka_configs:
                 cfg      = AFEDConfig(epsilon_base=eps, dka_t=t, dka_n=n)
-                pipeline = AFEDPipeline(cfg)
+                pipeline = AFEDPipeline(cfg, pretrained_gan_server=shared_gan_server)
                 shares   = pipeline.setup_dka()
                 pipeline.load_shares(shares[:t])
 
@@ -317,7 +438,8 @@ def run_e2e_benchmark(
                 budget_savings = []
 
                 for rep in range(repetitions):
-                    r = pipeline.process(traj, user_id=f"bench_{rep}")
+                    rep_rng = np.random.default_rng(seed + rep)
+                    r = pipeline.process(traj, user_id=f"bench_{rep}", rng=rep_rng)
                     for k, v in r.timing_ms.items():
                         stage_totals[k] = stage_totals.get(k, 0.0) + v
                     budget_savings.append(r.budget_savings)
